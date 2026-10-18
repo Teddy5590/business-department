@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW" data-lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>慈濟大學 經營管理學系 | Department of Business Management, Tzu Chi University</title>
+<meta name="description" content="Department of Business Management, Tzu Chi University — 慈濟大學經營管理學系">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     Design: Swiss / MIT-inspired minimalism
+     - One accent colour (cardinal red), black, white, grey
+     - Strong grid, thin rules, large bold type, no decoration
+     ============================================================ */
+  :root {
+    --red: #a31f34;        /* cardinal red accent */
+    --red-dark: #7f1727;
+    --black: #111111;
+    --grey-900: #1e1e1e;
+    --grey-600: #5f6062;
+    --grey-400: #8a8b8c;
+    --grey-200: #d9d9d9;
+    --grey-100: #f2f2f2;
+    --white: #ffffff;
+    --font: "Inter", "Noto Sans TC", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --max: 1240px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font); color: var(--black); background: var(--white); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+  img, video { max-width: 100%; display: block; }
+  a { color: inherit; }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 32px; }
+
+  /* ---------- Bilingual switching ---------- */
+  html[data-lang="zh"] [lang="en"] { display: none !important; }
+  html[data-lang="en"] [lang="zh"] { display: none !important; }
+
+  /* ---------- Header ---------- */
+  header.site { position: sticky; top: 0; z-index: 50; background: var(--white); border-bottom: 1px solid var(--black); }
+  header.site .wrap { display: flex; align-items: center; justify-content: space-between; height: 76px; gap: 24px; }
+  .brand { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+  .brand-mark { display: flex; gap: 4px; height: 34px; align-items: stretch; }
+  .brand-mark i { display: block; width: 7px; background: var(--black); }
+  .brand-mark i:nth-child(2) { background: var(--red); }
+  .brand-mark i:nth-child(3) { background: var(--grey-400); height: 70%; align-self: flex-end; }
+  .brand-name { line-height: 1.2; }
+  .brand-name .bn-main { display: block; font-size: 17px; font-weight: 800; letter-spacing: -.01em; }
+  .brand-name .bn-sub { display: block; font-size: 12px; color: var(--grey-600); letter-spacing: .02em; }
+  nav.main ul { list-style: none; display: flex; gap: 2px; }
+  nav.main a { display: block; padding: 8px 14px; font-size: 14px; font-weight: 600; text-decoration: none; }
+  nav.main a:hover { color: var(--red); }
+  nav.main a.active { color: var(--red); }
+  .head-tools { display: flex; align-items: center; gap: 10px; }
+  .lang-toggle { display: flex; border: 1px solid var(--black); }
+  .lang-toggle button { font: inherit; font-size: 13px; font-weight: 700; padding: 6px 12px; border: none; background: var(--white); color: var(--black); cursor: pointer; }
+  .lang-toggle button[aria-pressed="true"] { background: var(--black); color: var(--white); }
+  .menu-btn { display: none; font: inherit; font-size: 13px; font-weight: 700; padding: 6px 12px; border: 1px solid var(--black); background: var(--white); cursor: pointer; }
+
+  /* ---------- Hero ---------- */
+  .hero { border-bottom: 1px solid var(--black); }
+  .hero .wrap { display: grid; grid-template-columns: 7fr 5fr; min-height: 560px; }
+  .hero-text { padding: 80px 48px 64px 0; display: flex; flex-direction: column; justify-content: space-between; border-right: 1px solid var(--black); }
+  .kicker { font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--red); }
+  .hero h1 { font-size: clamp(44px, 7vw, 92px); font-weight: 800; line-height: 1.02; letter-spacing: -.035em; margin: 22px 0 28px; }
+  html[data-lang="zh"] .hero h1 { letter-spacing: .02em; line-height: 1.15; }
+  .hero p.lead { font-size: 18px; color: var(--grey-600); max-width: 560px; }
+  .hero-links { display: flex; flex-wrap: wrap; gap: 0; margin-top: 40px; border-top: 1px solid var(--black); }
+  .hero-links a { flex: 1 1 200px; padding: 18px 0; font-weight: 700; text-decoration: none; display: flex; justify-content: space-between; align-items: center; gap: 12px; border-bottom: 1px solid var(--grey-200); }
+  .hero-links a:hover { color: var(--red); }
+  .hero-links a + a { padding-left: 24px; border-left: 1px solid var(--grey-200); }
+  .arrow { font-weight: 400; }
+
+  /* ---------- Media placeholders ---------- */
+  .media-slot { background: var(--grey-100); display: flex; flex-direction: column; justify-content: flex-end; padding: 20px; color: var(--grey-600); font-size: 13px; min-height: 180px; position: relative; }
+  .media-slot::before { content: ""; position: absolute; inset: 0; background: linear-gradient(to top right, transparent calc(50% - .5px), var(--grey-200) 50%, transparent calc(50% + .5px)), linear-gradient(to top left, transparent calc(50% - .5px), var(--grey-200) 50%, transparent calc(50% + .5px)); }
+  .media-slot > * { position: relative; }
+  .media-slot strong { color: var(--black); font-size: 14px; display: block; }
+  .media-slot code { font-family: ui-monospace, Menlo, monospace; font-size: 12px; color: var(--red); }
+  .hero .media-slot { min-height: 100%; }
+
+  /* ---------- Section frame: label column + content column ---------- */
+  section { border-bottom: 1px solid var(--black); }
+  .row { display: grid; grid-template-columns: 3fr 9fr; gap: 48px; padding-top: 88px; padding-bottom: 88px; }
+  .label { font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+  .label .no { display: block; color: var(--red); font-size: 40px; letter-spacing: -.02em; font-weight: 800; line-height: 1; margin-bottom: 10px; }
+  h2 { font-size: clamp(30px, 3.6vw, 46px); font-weight: 800; letter-spacing: -.025em; line-height: 1.12; margin-bottom: 28px; }
+  html[data-lang="zh"] h2 { letter-spacing: .02em; }
+  .intro { font-size: 19px; color: var(--grey-900); max-width: 760px; }
+  .intro + .intro { margin-top: 18px; }
+  .muted { color: var(--grey-600); }
+
+  /* About */
+  .about-split { display: grid; grid-template-columns: 1.15fr 1fr; gap: 40px; align-items: start; }
+  .about-split .media-slot { aspect-ratio: 4 / 3; }
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 30px; list-style: none; }
+  .tags li { font-size: 13px; font-weight: 600; padding: 5px 12px; border: 1px solid var(--black); }
+
+  /* Goals */
+  .goals { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; margin-top: 12px; }
+  .goal { border-top: 4px solid var(--black); padding-top: 18px; }
+  .goal:first-child { border-top-color: var(--red); }
+  .goal .n { font-size: 13px; font-weight: 700; color: var(--grey-400); letter-spacing: .1em; }
+  .goal h3 { font-size: 20px; font-weight: 800; letter-spacing: -.01em; line-height: 1.3; margin: 10px 0 10px; }
+  .goal p { font-size: 15px; color: var(--grey-600); }
+
+  /* Facilities */
+  .facilities { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--black); border-left: 1px solid var(--grey-200); }
+  .facility { border-right: 1px solid var(--grey-200); border-bottom: 1px solid var(--grey-200); padding: 0 0 24px; display: flex; flex-direction: column; }
+  .facility .media-slot { aspect-ratio: 16 / 10; min-height: 0; }
+  .facility h3 { font-size: 18px; font-weight: 800; padding: 20px 22px 6px; letter-spacing: -.01em; }
+  .facility p { font-size: 14px; color: var(--grey-600); padding: 0 22px; }
+
+  /* Video (dark band) */
+  .dark { background: var(--black); color: var(--white); border-bottom-color: var(--black); }
+  .dark .label .no { color: var(--red); }
+  .dark .muted { color: var(--grey-400); }
+  .dark .media-slot { background: var(--grey-900); color: var(--grey-400); aspect-ratio: 16 / 9; }
+  .dark .media-slot::before { background: linear-gradient(to top right, transparent calc(50% - .5px), #333 50%, transparent calc(50% + .5px)), linear-gradient(to top left, transparent calc(50% - .5px), #333 50%, transparent calc(50% + .5px)); }
+  .dark .media-slot strong { color: var(--white); }
+  .dark .media-slot code { color: #ff8a9a; }
+
+  /* Student works CTA (red band) */
+  .cta { background: var(--red); color: var(--white); border-bottom: none; }
+  .cta .label .no { color: var(--white); opacity: .55; }
+  .cta p { color: #f6d9de; font-size: 18px; max-width: 640px; }
+  .cta-links { display: grid; grid-template-columns: 1fr 1fr; margin-top: 40px; border-top: 1px solid rgba(255,255,255,.5); }
+  .cta-links a { padding: 22px 0; font-size: 18px; font-weight: 700; text-decoration: none; display: flex; justify-content: space-between; gap: 12px; border-bottom: 1px solid rgba(255,255,255,.5); }
+  .cta-links a + a { padding-left: 28px; border-left: 1px solid rgba(255,255,255,.5); }
+  .cta-links a:hover { background: var(--red-dark); }
+
+  /* ---------- Footer ---------- */
+  footer.site { background: var(--black); color: var(--grey-400); font-size: 14px; }
+  footer .cols { display: grid; grid-template-columns: 5fr 3fr 3fr; gap: 40px; padding: 64px 0 48px; }
+  footer h4 { color: var(--white); font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 16px; }
+  footer .big { color: var(--white); font-size: 22px; font-weight: 800; letter-spacing: -.01em; line-height: 1.3; margin-bottom: 16px; }
+  footer ul { list-style: none; }
+  footer li { margin-bottom: 8px; }
+  footer a { text-decoration: none; }
+  footer a:hover { color: var(--white); text-decoration: underline; }
+  .legal { border-top: 1px solid #333; padding: 22px 0 28px; font-size: 12px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 1000px) {
+    .goals { grid-template-columns: repeat(2, 1fr); }
+    .facilities { grid-template-columns: repeat(2, 1fr); }
+    .row { grid-template-columns: 1fr; gap: 24px; padding-top: 64px; padding-bottom: 64px; }
+    .label .no { font-size: 32px; }
+  }
+  @media (max-width: 860px) {
+    .menu-btn { display: block; }
+    nav.main { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--white); border-bottom: 1px solid var(--black); }
+    nav.main.open { display: block; }
+    nav.main ul { flex-direction: column; padding: 8px 16px 16px; }
+    nav.main a { padding: 14px 4px; border-bottom: 1px solid var(--grey-200); }
+    .hero .wrap { grid-template-columns: 1fr; min-height: 0; }
+    .hero-text { border-right: none; padding: 56px 0 40px; }
+    .hero .media-slot { aspect-ratio: 16 / 10; min-height: 0; margin-bottom: 32px; }
+    .about-split { grid-template-columns: 1fr; }
+    footer .cols { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 560px) {
+    .wrap { padding: 0 16px; }
+    header.site .wrap { height: 64px; }
+    .brand-name .bn-sub { display: none; }
+    .goals, .facilities, .cta-links { grid-template-columns: 1fr; }
+    .cta-links a + a, .hero-links a + a { padding-left: 0; border-left: none; }
+    .hero p.lead, .intro { font-size: 17px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ Header ============ -->
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span class="brand-name">
+        <strong class="bn-main"><span lang="zh">經營管理學系</span><span lang="en">Business Management</span></strong>
+        <span class="bn-sub"><span lang="zh">慈濟大學</span><span lang="en">Tzu Chi University</span></span>
+      </span>
+    </a>
+
+    <nav class="main" aria-label="Main">
+      <ul>
+        <li><a href="index.html" class="active"><span lang="zh">系所簡介</span><span lang="en">About</span></a></li>
+        <li><a href="#goals"><span lang="zh">教育目標</span><span lang="en">Goals</span></a></li>
+        <li><a href="#facilities"><span lang="zh">教學設備</span><span lang="en">Facilities</span></a></li>
+        <li><a href="studentworks.html"><span lang="zh">學生作品</span><span lang="en">Student Works</span></a></li>
+        <li><a href="#contact"><span lang="zh">聯絡我們</span><span lang="en">Contact</span></a></li>
+      </ul>
+    </nav>
+
+    <div class="head-tools">
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button type="button" data-set-lang="zh" aria-pressed="true">中文</button>
+        <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <button class="menu-btn" type="button" aria-expanded="false"><span lang="zh">選單</span><span lang="en">Menu</span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============ Hero ============ -->
+  <div class="hero">
+    <div class="wrap">
+      <div class="hero-text">
+        <div>
+          <div class="kicker"><span lang="zh">慈濟大學 ・ 花蓮</span><span lang="en">Tzu Chi University · Hualien, Taiwan</span></div>
+          <h1>
+            <span lang="zh">經營管理<br>學系</span>
+            <span lang="en">Department of<br>Business<br>Management</span>
+          </h1>
+          <p class="lead">
+            <span lang="zh">以人文為本，以實務為用。我們培育具備職場倫理、創意思考、團隊合作與跨文化視野的商管人才，實踐創新與永續的經營理念。</span>
+            <span lang="en">Grounded in humanity, driven by practice. We educate business professionals with workplace ethics, creative thinking, teamwork, and a cross-cultural outlook, committed to innovative and sustainable management.</span>
+          </p>
+        </div>
+        <div class="hero-links">
+          <a href="#about"><span><span lang="zh">認識本系</span><span lang="en">About the Department</span></span><span class="arrow">↓</span></a>
+          <a href="https://mdm.tcu.edu.tw/p/412-1021-3692.php?Lang=zh-tw" target="_blank" rel="noopener"><span><span lang="zh">學習成果</span><span lang="en">Learning Outcomes</span></span><span class="arrow">↗</span></a>
+        </div>
+      </div>
+      <!-- PHOTO SLOT — replace this div with:
+           <img src="graph/hero-campus.jpg" alt="Tzu Chi University campus" style="width:100%;height:100%;object-fit:cover"> -->
+      <div class="media-slot">
+        <strong><span lang="zh">主視覺照片（預留）</span><span lang="en">Hero photo (placeholder)</span></strong>
+        <code>graph/hero-campus.jpg</code>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 01 About ============ -->
+  <section id="about">
+    <div class="wrap row">
+      <div class="label"><span class="no">01</span><span lang="zh">系所簡介</span><span lang="en">About</span></div>
+      <div>
+        <h2><span lang="zh">結合商管專業與人文教育</span><span lang="en">Business expertise, rooted in the humanities</span></h2>
+        <div class="about-split">
+          <div>
+            <p class="intro">
+              <span lang="zh">慈濟大學經營管理學系結合商管專業與人文教育，課程涵蓋行銷管理、餐飲業管理、行銷企劃與市場分析等領域。本系重視理論與實務並行，透過個案教學、實習場域與專題研究，讓學生在真實情境中學習經營決策。</span>
+              <span lang="en">The Department of Business Management at Tzu Chi University combines professional business education with the humanities. Our curriculum covers marketing management, food and beverage management, and marketing planning and market analysis. Theory and practice go hand in hand: through case teaching, practicum facilities, and capstone projects, students learn to make management decisions in real settings.</span>
+            </p>
+            <p class="intro">
+              <span lang="zh">本系匯聚來自不同國家的學生，在多元文化的學習環境中建立跨文化溝通能力，並以創新與永續經營為核心理念，培養能回應社會需求、具備責任感的未來經營者。</span>
+              <span lang="en">Students from many countries study together here, building cross-cultural communication skills in a diverse learning community. With innovation and sustainability at our core, we prepare responsible future leaders who can respond to the needs of society.</span>
+            </p>
+            <ul class="tags">
+              <li><span lang="zh">行銷管理</span><span lang="en">Marketing Management</span></li>
+              <li><span lang="zh">餐飲業管理</span><span lang="en">F&amp;B Management</span></li>
+              <li><span lang="zh">行銷企劃與市場分析</span><span lang="en">Marketing Planning &amp; Market Analysis</span></li>
+              <li><span lang="zh">跨文化視野</span><span lang="en">Cross-Cultural Perspective</span></li>
+              <li><span lang="zh">創新與永續經營</span><span lang="en">Innovation &amp; Sustainability</span></li>
+            </ul>
+          </div>
+          <!-- PHOTO SLOT — replace with <img src="graph/about-classroom.jpg" alt="..."> -->
+          <div class="media-slot">
+            <strong><span lang="zh">系所照片（預留）</span><span lang="en">Department photo (placeholder)</span></strong>
+            <code>graph/about-classroom.jpg</code>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 02 Goals ============ -->
+  <section id="goals">
+    <div class="wrap row">
+      <div class="label"><span class="no">02</span><span lang="zh">教育目標</span><span lang="en">Educational Goals</span></div>
+      <div>
+        <h2><span lang="zh">四大教育目標</span><span lang="en">Four educational goals</span></h2>
+        <div class="goals">
+          <div class="goal">
+            <div class="n">01</div>
+            <h3><span lang="zh">人文素養與職場倫理</span><span lang="en">Humanity &amp; Workplace Ethics</span></h3>
+            <p><span lang="zh">培育具人文素養與重視職場倫理之商管人才。</span><span lang="en">Developing business professionals with humanistic literacy and a strong commitment to workplace ethics.</span></p>
+          </div>
+          <div class="goal">
+            <div class="n">02</div>
+            <h3><span lang="zh">創意思考能力</span><span lang="en">Creative Thinking</span></h3>
+            <p><span lang="zh">培育具創意思考能力之商管人才。</span><span lang="en">Developing business professionals who think creatively.</span></p>
+          </div>
+          <div class="goal">
+            <div class="n">03</div>
+            <h3><span lang="zh">團隊合作精神</span><span lang="en">Teamwork</span></h3>
+            <p><span lang="zh">培育具團隊合作精神之商管人才。</span><span lang="en">Developing business professionals who work effectively in teams.</span></p>
+          </div>
+          <div class="goal">
+            <div class="n">04</div>
+            <h3><span lang="zh">跨文化視野</span><span lang="en">Cross-Cultural Vision</span></h3>
+            <p><span lang="zh">培育具跨文化視野之商管人才。</span><span lang="en">Developing business professionals with a cross-cultural, global outlook.</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 03 Facilities ============ -->
+  <section id="facilities">
+    <div class="wrap row">
+      <div class="label"><span class="no">03</span><span lang="zh">教學設備</span><span lang="en">Facilities</span></div>
+      <div>
+        <h2><span lang="zh">在真實情境中學習</span><span lang="en">Learning in real business settings</span></h2>
+        <div class="facilities">
+          <article class="facility">
+            <div class="media-slot"><code>graph/facility-case-room.jpg</code></div>
+            <h3><span lang="zh">個案教學研討室</span><span lang="en">Case Study Seminar Room</span></h3>
+            <p><span lang="zh">以翻轉教育理論設計的個案討論環境。</span><span lang="en">A case discussion space designed around flipped-classroom teaching.</span></p>
+          </article>
+          <article class="facility">
+            <div class="media-slot"><code>graph/facility-cafe.jpg</code></div>
+            <h3><span lang="zh">實習教室（知足咖啡館）</span><span lang="en">Practicum Café (Zhizu Café)</span></h3>
+            <p><span lang="zh">外場行銷體驗實習場域，建置高規格專業餐飲與服務設備。</span><span lang="en">A front-of-house practicum space with professional food service and hospitality equipment.</span></p>
+          </article>
+          <article class="facility">
+            <div class="media-slot"><code>graph/facility-smart-store.jpg</code></div>
+            <h3><span lang="zh">智慧商店</span><span lang="en">Smart Store Lab</span></h3>
+            <p><span lang="zh">建置虛擬情境，讓學生提早適應無人商店的概念。</span><span lang="en">A simulated retail environment that introduces students to unstaffed, smart-store concepts.</span></p>
+          </article>
+          <article class="facility">
+            <div class="media-slot"><code>graph/facility-intl-business.jpg</code></div>
+            <h3><span lang="zh">國際商務教室</span><span lang="en">International Business Classroom</span></h3>
+            <p><span lang="zh">提供安靜舒適的研習空間。</span><span lang="en">A quiet, comfortable space for study and seminars.</span></p>
+          </article>
+          <article class="facility">
+            <div class="media-slot"><code>graph/facility-presentation.jpg</code></div>
+            <h3><span lang="zh">簡報與溝通教室</span><span lang="en">Presentation &amp; Communication Room</span></h3>
+            <p><span lang="zh">具備簡報投影等相關影音設備。</span><span lang="en">Equipped with projection and audio-visual equipment for presentations.</span></p>
+          </article>
+          <article class="facility">
+            <div class="media-slot"><code>graph/facility-mice.jpg</code></div>
+            <h3><span lang="zh">MICE 國際會展教學教室</span><span lang="en">MICE Teaching Classroom</span></h3>
+            <p><span lang="zh">會議、獎勵旅遊、大型會議與展覽產業之教學場域。</span><span lang="en">A teaching space for the meetings, incentives, conferences and exhibitions industry.</span></p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 04 Video ============ -->
+  <section class="dark">
+    <div class="wrap row">
+      <div class="label"><span class="no">04</span><span lang="zh">系所影片</span><span lang="en">Film</span></div>
+      <div>
+        <h2><span lang="zh">透過影像認識經管系</span><span lang="en">See the department in motion</span></h2>
+        <p class="muted" style="margin-bottom:28px">
+          <span lang="zh">介紹本系師生、課程與學習場域的影片，將於後續課程拍攝後上架。</span>
+          <span lang="en">A film introducing our students, faculty, courses, and facilities will be added after production in upcoming classes.</span>
+        </p>
+        <!-- VIDEO SLOT — replace with:
+             <video src="graph/department-intro.mp4" controls poster="graph/department-intro-poster.jpg"></video> -->
+        <div class="media-slot">
+          <strong><span lang="zh">系所介紹影片（預留）</span><span lang="en">Department video (placeholder)</span></strong>
+          <code>graph/department-intro.mp4</code>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 05 Student works ============ -->
+  <section class="cta">
+    <div class="wrap row">
+      <div class="label"><span class="no">05</span><span lang="zh">學生作品</span><span lang="en">Student Works</span></div>
+      <div>
+        <h2><span lang="zh">學生作品與學習成果</span><span lang="en">Student works &amp; learning outcomes</span></h2>
+        <p>
+          <span lang="zh">從咖啡館經營、專題發表到國際交流，看見經管系學生的實作成果。</span>
+          <span lang="en">From running a café to capstone presentations and international exchange, explore what our students create.</span>
+        </p>
+        <div class="cta-links">
+          <a href="studentworks.html"><span><span lang="zh">瀏覽學生作品</span><span lang="en">View student works</span></span><span class="arrow">→</span></a>
+          <a href="https://mdm.tcu.edu.tw/p/412-1021-3692.php?Lang=zh-tw" target="_blank" rel="noopener"><span><span lang="zh">學習成果</span><span lang="en">Learning outcomes</span></span><span class="arrow">↗</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ Footer ============ -->
+<footer class="site" id="contact">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <div class="big"><span lang="zh">慈濟大學<br>經營管理學系</span><span lang="en">Department of Business Management<br>Tzu Chi University</span></div>
+        <p>
+          <span lang="zh">970 花蓮市介仁街 67 號</span><span lang="en">No. 67, Jieren St., Hualien City 970, Taiwan</span><br>
+          <span lang="zh">電話</span><span lang="en">Tel</span> 03-857-2677 ext. 31682<br>
+          <a href="mailto:ss62@gms.tcu.edu.tw">ss62@gms.tcu.edu.tw</a>
+        </p>
+      </div>
+      <div>
+        <h4><span lang="zh">網站導覽</span><span lang="en">Explore</span></h4>
+        <ul>
+          <li><a href="index.html"><span lang="zh">系所簡介</span><span lang="en">About</span></a></li>
+          <li><a href="studentworks.html"><span lang="zh">學生作品</span><span lang="en">Student Works</span></a></li>
+          <li><a href="https://mdm.tcu.edu.tw/p/412-1021-3692.php?Lang=zh-tw" target="_blank" rel="noopener"><span lang="zh">學習成果</span><span lang="en">Learning Outcomes</span> ↗</a></li>
+          <li><a href="https://mdm.tcu.edu.tw/" target="_blank" rel="noopener"><span lang="zh">系所官方網站</span><span lang="en">Official Website</span> ↗</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4><span lang="zh">社群媒體</span><span lang="en">Follow</span></h4>
+        <ul>
+          <li><a href="https://www.instagram.com/tcu_business_management/" target="_blank" rel="noopener">Instagram ↗</a></li>
+          <li><a href="https://www.youtube.com/@_tcust5687" target="_blank" rel="noopener">YouTube ↗</a></li>
+          <li><a href="https://www.facebook.com/profile.php?id=100086684253354" target="_blank" rel="noopener">Facebook ↗</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© 2026 <span lang="zh">慈濟大學經營管理學系</span><span lang="en">Department of Business Management, Tzu Chi University</span></span>
+      <span><span lang="zh">網頁設計課程專題</span><span lang="en">Web design course project</span></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ---------- Language switch (中文 / EN) ----------
+  const root = document.documentElement;
+  const langButtons = document.querySelectorAll('[data-set-lang]');
+
+  function setLang(lang) {
+    root.setAttribute('data-lang', lang);
+    root.setAttribute('lang', lang === 'zh' ? 'zh-Hant-TW' : 'en');
+    langButtons.forEach(b => b.setAttribute('aria-pressed', b.dataset.setLang === lang));
+    try { localStorage.setItem('site-lang', lang); } catch (e) {}
+  }
+
+  let saved = null;
+  try { saved = localStorage.getItem('site-lang'); } catch (e) {}
+  setLang(saved === 'en' ? 'en' : 'zh');
+  langButtons.forEach(b => b.addEventListener('click', () => setLang(b.dataset.setLang)));
+
+  // ---------- Mobile menu ----------
+  const menuBtn = document.querySelector('.menu-btn');
+  const nav = document.querySelector('nav.main');
+  menuBtn.addEventListener('click', () => {
+    const open = nav.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', open);
+  });
+  nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    nav.classList.remove('open');
+    menuBtn.setAttribute('aria-expanded', false);
+  }));
+</script>
+</body>
+</html>

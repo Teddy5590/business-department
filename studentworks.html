@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW" data-lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>學生作品 Student Works | 慈濟大學 經營管理學系</title>
+<meta name="description" content="Student works and projects — Department of Business Management, Tzu Chi University. 慈濟大學經營管理學系學生作品與專題。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     Shared design system (same as index.html)
+     ============================================================ */
+  :root {
+    --red: #a31f34;
+    --red-dark: #7f1727;
+    --black: #111111;
+    --grey-900: #1e1e1e;
+    --grey-600: #5f6062;
+    --grey-400: #8a8b8c;
+    --grey-200: #d9d9d9;
+    --grey-100: #f2f2f2;
+    --white: #ffffff;
+    --font: "Inter", "Noto Sans TC", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --max: 1240px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font); color: var(--black); background: var(--white); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+  img, video { max-width: 100%; display: block; }
+  a { color: inherit; }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 32px; }
+
+  html[data-lang="zh"] [lang="en"] { display: none !important; }
+  html[data-lang="en"] [lang="zh"] { display: none !important; }
+
+  /* Header */
+  header.site { position: sticky; top: 0; z-index: 50; background: var(--white); border-bottom: 1px solid var(--black); }
+  header.site .wrap { display: flex; align-items: center; justify-content: space-between; height: 76px; gap: 24px; }
+  .brand { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+  .brand-mark { display: flex; gap: 4px; height: 34px; align-items: stretch; }
+  .brand-mark i { display: block; width: 7px; background: var(--black); }
+  .brand-mark i:nth-child(2) { background: var(--red); }
+  .brand-mark i:nth-child(3) { background: var(--grey-400); height: 70%; align-self: flex-end; }
+  .brand-name { line-height: 1.2; }
+  .brand-name .bn-main { display: block; font-size: 17px; font-weight: 800; letter-spacing: -.01em; }
+  .brand-name .bn-sub { display: block; font-size: 12px; color: var(--grey-600); letter-spacing: .02em; }
+  nav.main ul { list-style: none; display: flex; gap: 2px; }
+  nav.main a { display: block; padding: 8px 14px; font-size: 14px; font-weight: 600; text-decoration: none; }
+  nav.main a:hover, nav.main a.active { color: var(--red); }
+  .head-tools { display: flex; align-items: center; gap: 10px; }
+  .lang-toggle { display: flex; border: 1px solid var(--black); }
+  .lang-toggle button { font: inherit; font-size: 13px; font-weight: 700; padding: 6px 12px; border: none; background: var(--white); color: var(--black); cursor: pointer; }
+  .lang-toggle button[aria-pressed="true"] { background: var(--black); color: var(--white); }
+  .menu-btn { display: none; font: inherit; font-size: 13px; font-weight: 700; padding: 6px 12px; border: 1px solid var(--black); background: var(--white); cursor: pointer; }
+
+  /* Media placeholders */
+  .media-slot { background: var(--grey-100); display: flex; flex-direction: column; justify-content: flex-end; padding: 18px; color: var(--grey-600); font-size: 13px; min-height: 160px; position: relative; }
+  .media-slot::before { content: ""; position: absolute; inset: 0; background: linear-gradient(to top right, transparent calc(50% - .5px), var(--grey-200) 50%, transparent calc(50% + .5px)), linear-gradient(to top left, transparent calc(50% - .5px), var(--grey-200) 50%, transparent calc(50% + .5px)); }
+  .media-slot > * { position: relative; }
+  .media-slot strong { color: var(--black); font-size: 14px; display: block; }
+  .media-slot code { font-family: ui-monospace, Menlo, monospace; font-size: 12px; color: var(--red); }
+
+  /* Sections */
+  section { border-bottom: 1px solid var(--black); }
+  .row { display: grid; grid-template-columns: 3fr 9fr; gap: 48px; padding-top: 88px; padding-bottom: 88px; }
+  .label { font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+  .label .no { display: block; color: var(--red); font-size: 40px; letter-spacing: -.02em; font-weight: 800; line-height: 1; margin-bottom: 10px; }
+  h2 { font-size: clamp(30px, 3.6vw, 46px); font-weight: 800; letter-spacing: -.025em; line-height: 1.12; margin-bottom: 24px; }
+  html[data-lang="zh"] h2 { letter-spacing: .02em; }
+  .muted { color: var(--grey-600); }
+
+  /* ============================================================
+     Page-specific: Student Works
+     ============================================================ */
+  .page-head { border-bottom: 1px solid var(--black); }
+  .page-head .wrap { padding-top: 72px; padding-bottom: 56px; }
+  .crumbs { font-size: 13px; color: var(--grey-600); margin-bottom: 26px; }
+  .crumbs a { text-decoration: none; font-weight: 600; color: var(--black); }
+  .crumbs a:hover { color: var(--red); }
+  .kicker { font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--red); }
+  .page-head h1 { font-size: clamp(44px, 7vw, 92px); font-weight: 800; line-height: 1.02; letter-spacing: -.035em; margin: 18px 0 26px; }
+  html[data-lang="zh"] .page-head h1 { letter-spacing: .02em; line-height: 1.15; }
+  .page-head .lead { font-size: 19px; color: var(--grey-600); max-width: 720px; }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 48px; border-top: 1px solid var(--black); }
+  .stat { padding: 18px 20px 0 0; }
+  .stat + .stat { padding-left: 20px; border-left: 1px solid var(--grey-200); }
+  .stat b { display: block; font-size: 34px; font-weight: 800; letter-spacing: -.02em; line-height: 1.1; }
+  .stat > span { font-size: 13px; color: var(--grey-600); }
+
+  /* Filter bar */
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px; }
+  .filters button { font: inherit; font-size: 13px; font-weight: 700; padding: 7px 14px; border: 1px solid var(--black); background: var(--white); color: var(--black); cursor: pointer; }
+  .filters button:hover { border-color: var(--red); color: var(--red); }
+  .filters button[aria-pressed="true"] { background: var(--black); color: var(--white); border-color: var(--black); }
+
+  /* Works grid */
+  .works-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px 28px; }
+  .work { display: flex; flex-direction: column; border-top: 4px solid var(--black); padding-top: 0; }
+  .work.featured { grid-column: span 2; }
+  .work .media-slot { aspect-ratio: 4 / 3; min-height: 0; }
+  .work.featured .media-slot { aspect-ratio: 16 / 9; }
+  .work .meta { display: flex; justify-content: space-between; gap: 12px; font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--red); margin-top: 16px; }
+  .work .meta .yr { color: var(--grey-400); }
+  .work h3 { font-size: 20px; font-weight: 800; letter-spacing: -.01em; line-height: 1.3; margin: 6px 0 8px; }
+  .work p { font-size: 15px; color: var(--grey-600); }
+  .work .links { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 6px 16px; }
+  .work .links a { font-size: 14px; font-weight: 700; text-decoration: none; border-bottom: 1px solid var(--black); }
+  .work .links a:hover { color: var(--red); border-color: var(--red); }
+  .work[hidden] { display: none; }
+  .empty-msg { display: none; color: var(--grey-600); padding: 24px 0; }
+
+  /* Agrihubbers video list */
+  .video-list { list-style: none; border-top: 1px solid var(--black); }
+  .video-list li { border-bottom: 1px solid var(--grey-200); }
+  .video-list a { display: grid; grid-template-columns: 56px 1fr auto; align-items: center; gap: 16px; padding: 18px 0; text-decoration: none; }
+  .video-list a:hover { color: var(--red); }
+  .video-list .idx { font-weight: 800; color: var(--grey-400); }
+  .video-list .t { font-weight: 700; font-size: 17px; }
+  .video-list .t small { display: block; font-weight: 400; font-size: 13px; color: var(--grey-600); }
+  .video-list .go { font-size: 13px; font-weight: 700; }
+
+  /* Dark band — featured film */
+  .dark { background: var(--black); color: var(--white); }
+  .dark .muted { color: var(--grey-400); }
+  .dark .media-slot { background: var(--grey-900); color: var(--grey-400); aspect-ratio: 16 / 9; }
+  .dark .media-slot::before { background: linear-gradient(to top right, transparent calc(50% - .5px), #333 50%, transparent calc(50% + .5px)), linear-gradient(to top left, transparent calc(50% - .5px), #333 50%, transparent calc(50% + .5px)); }
+  .dark .media-slot strong { color: var(--white); }
+  .dark .media-slot code { color: #ff8a9a; }
+
+  /* Upcoming gallery (reserved for class photos) */
+  .gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .gallery .media-slot { aspect-ratio: 1 / 1; min-height: 0; }
+  .gallery .media-slot.wide { grid-column: span 2; aspect-ratio: auto; }
+
+  /* Red CTA */
+  .cta { background: var(--red); color: var(--white); border-bottom: none; }
+  .cta .label .no { color: var(--white); opacity: .55; }
+  .cta p { color: #f6d9de; font-size: 18px; max-width: 640px; }
+  .cta-links { display: grid; grid-template-columns: 1fr 1fr; margin-top: 40px; border-top: 1px solid rgba(255,255,255,.5); }
+  .cta-links a { padding: 22px 0; font-size: 18px; font-weight: 700; text-decoration: none; display: flex; justify-content: space-between; gap: 12px; border-bottom: 1px solid rgba(255,255,255,.5); }
+  .cta-links a + a { padding-left: 28px; border-left: 1px solid rgba(255,255,255,.5); }
+  .cta-links a:hover { background: var(--red-dark); }
+
+  /* Footer */
+  footer.site { background: var(--black); color: var(--grey-400); font-size: 14px; }
+  footer .cols { display: grid; grid-template-columns: 5fr 3fr 3fr; gap: 40px; padding: 64px 0 48px; }
+  footer h4 { color: var(--white); font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 16px; }
+  footer .big { color: var(--white); font-size: 22px; font-weight: 800; letter-spacing: -.01em; line-height: 1.3; margin-bottom: 16px; }
+  footer ul { list-style: none; }
+  footer li { margin-bottom: 8px; }
+  footer a { text-decoration: none; }
+  footer a:hover { color: var(--white); text-decoration: underline; }
+  .legal { border-top: 1px solid #333; padding: 22px 0 28px; font-size: 12px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+
+  /* Responsive */
+  @media (max-width: 1000px) {
+    .row { grid-template-columns: 1fr; gap: 24px; padding-top: 64px; padding-bottom: 64px; }
+    .label .no { font-size: 32px; }
+    .works-grid { grid-template-columns: repeat(2, 1fr); }
+    .gallery { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 860px) {
+    .menu-btn { display: block; }
+    nav.main { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--white); border-bottom: 1px solid var(--black); }
+    nav.main.open { display: block; }
+    nav.main ul { flex-direction: column; padding: 8px 16px 16px; }
+    nav.main a { padding: 14px 4px; border-bottom: 1px solid var(--grey-200); }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .stat:nth-child(3) { padding-left: 0; border-left: none; }
+    footer .cols { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 560px) {
+    .wrap { padding: 0 16px; }
+    header.site .wrap { height: 64px; }
+    .brand-name .bn-sub { display: none; }
+    .works-grid, .cta-links { grid-template-columns: 1fr; }
+    .work.featured { grid-column: auto; }
+    .cta-links a + a { padding-left: 0; border-left: none; }
+    .page-head .lead { font-size: 17px; }
+    .video-list a { grid-template-columns: 36px 1fr; }
+    .video-list .go { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ Header ============ -->
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span class="brand-name">
+        <strong class="bn-main"><span lang="zh">經營管理學系</span><span lang="en">Business Management</span></strong>
+        <span class="bn-sub"><span lang="zh">慈濟大學</span><span lang="en">Tzu Chi University</span></span>
+      </span>
+    </a>
+
+    <nav class="main" aria-label="Main">
+      <ul>
+        <li><a href="index.html"><span lang="zh">系所簡介</span><span lang="en">About</span></a></li>
+        <li><a href="index.html#goals"><span lang="zh">教育目標</span><span lang="en">Goals</span></a></li>
+        <li><a href="index.html#facilities"><span lang="zh">教學設備</span><span lang="en">Facilities</span></a></li>
+        <li><a href="studentworks.html" class="active"><span lang="zh">學生作品</span><span lang="en">Student Works</span></a></li>
+        <li><a href="#contact"><span lang="zh">聯絡我們</span><span lang="en">Contact</span></a></li>
+      </ul>
+    </nav>
+
+    <div class="head-tools">
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button type="button" data-set-lang="zh" aria-pressed="true">中文</button>
+        <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <button class="menu-btn" type="button" aria-expanded="false"><span lang="zh">選單</span><span lang="en">Menu</span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============ Page heading ============ -->
+  <div class="page-head">
+    <div class="wrap">
+      <div class="crumbs">
+        <a href="index.html"><span lang="zh">首頁</span><span lang="en">Home</span></a> /
+        <span lang="zh">學生作品</span><span lang="en">Student Works</span>
+      </div>
+      <div class="kicker"><span lang="zh">學生作品與專題</span><span lang="en">Student Works &amp; Projects</span></div>
+      <h1>
+        <span lang="zh">學以致用，<br>從課堂走向社會</span>
+        <span lang="en">Learning<br>by doing</span>
+      </h1>
+      <p class="lead">
+        <span lang="zh">經管系學生透過咖啡館經營、專題研究、社企合作與國際交流，將課堂所學應用於真實的商業情境。以下為本系學生的代表作品與學習活動。</span>
+        <span lang="en">Our students apply what they learn in class to real business settings: running a café, conducting capstone research, partnering with social enterprises, and learning across cultures. Here is a selection of their work.</span>
+      </p>
+      <div class="stats">
+        <div class="stat"><b>10+</b><span lang="zh">學生作品與活動</span><span lang="en">works &amp; activities</span></div>
+        <div class="stat"><b>5</b><span lang="zh">社企專題影片</span><span lang="en">social enterprise films</span></div>
+        <div class="stat"><b><span lang="zh">每週五</span><span lang="en">Fridays</span></b><span lang="zh">學生咖啡館營業</span><span lang="en">student café opens</span></div>
+        <div class="stat"><b><span lang="zh">多國籍</span><span lang="en">Global</span></b><span lang="zh">本國生與外籍生共學</span><span lang="en">local &amp; international students</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 01 Selected works ============ -->
+  <section id="works">
+    <div class="wrap row">
+      <div class="label"><span class="no">01</span><span lang="zh">精選作品</span><span lang="en">Selected Works</span></div>
+      <div>
+        <h2><span lang="zh">作品與學習活動</span><span lang="en">Works &amp; learning activities</span></h2>
+
+        <div class="filters" role="group" aria-label="Filter">
+          <button type="button" data-filter="all" aria-pressed="true"><span lang="zh">全部</span><span lang="en">All</span></button>
+          <button type="button" data-filter="project" aria-pressed="false"><span lang="zh">專題研究</span><span lang="en">Projects</span></button>
+          <button type="button" data-filter="practicum" aria-pressed="false"><span lang="zh">實務經營</span><span lang="en">Practicum</span></button>
+          <button type="button" data-filter="global" aria-pressed="false"><span lang="zh">國際交流</span><span lang="en">Global</span></button>
+          <button type="button" data-filter="media" aria-pressed="false"><span lang="zh">影音作品</span><span lang="en">Media</span></button>
+        </div>
+
+        <div class="works-grid">
+
+          <!-- Featured: Indonesian class presentation -->
+          <article class="work featured" data-cat="project global">
+            <!-- PHOTO SLOT — replace with <img src="graph/work-indonesia-presentation.jpg" alt="..."> -->
+            <div class="media-slot"><strong><span lang="zh">照片預留</span><span lang="en">Photo placeholder</span></strong><code>graph/work-indonesia-presentation.jpg</code></div>
+            <div class="meta"><span><span lang="zh">專題 ・ 國際</span><span lang="en">Project · Global</span></span></div>
+            <h3><span lang="zh">印尼專班成果發表</span><span lang="en">Indonesian Program Showcase</span></h3>
+            <p><span lang="zh">印尼班同學的成果發表，展現行銷創意、英語能力與多媒體運用。</span><span lang="en">Students in the Indonesian program present their work, demonstrating marketing creativity, English proficiency, and multimedia skills.</span></p>
+          </article>
+
+          <!-- Student-run café -->
+          <article class="work" data-cat="practicum">
+            <div class="media-slot"><code>graph/work-cafe.jpg</code></div>
+            <div class="meta"><span><span lang="zh">實務經營</span><span lang="en">Practicum</span></span></div>
+            <h3><span lang="zh">學生經營咖啡館</span><span lang="en">Student-Run Café</span></h3>
+            <p><span lang="zh">每週五於知足二館（藝文中心）營業。學生從進貨、盤點、成本控制到行銷推廣，親身體驗創業與經營管理。</span><span lang="en">Open every Friday at the Arts Center. Students handle purchasing, inventory, cost control, and promotion, gaining hands-on entrepreneurial experience.</span></p>
+          </article>
+
+          <!-- Indonesian vegetarian food -->
+          <article class="work" data-cat="practicum media global">
+            <div class="media-slot"><code>graph/work-indonesian-vegetarian.jpg</code></div>
+            <div class="meta"><span><span lang="zh">實務 ・ 影音</span><span lang="en">Practicum · Media</span></span></div>
+            <h3><span lang="zh">印尼異國蔬食</span><span lang="en">Indonesian Vegetarian Cuisine</span></h3>
+            <p><span lang="zh">印尼學生將家鄉美食轉化為美味蔬食，並運用網路行銷推廣家鄉傳統小吃。</span><span lang="en">Indonesian students reimagined dishes from home as vegetarian cuisine and promoted them through online marketing.</span></p>
+            <div class="links"><a href="https://www.youtube.com/watch?v=pKylQ9I6wzU" target="_blank" rel="noopener"><span lang="zh">觀看影片</span><span lang="en">Watch video</span> ↗</a></div>
+          </article>
+
+          <!-- Capstone presentations -->
+          <article class="work" data-cat="project">
+            <div class="media-slot"><code>graph/work-capstone.jpg</code></div>
+            <div class="meta"><span><span lang="zh">專題研究</span><span lang="en">Project</span></span></div>
+            <h3><span lang="zh">專題發表會</span><span lang="en">Capstone Presentations</span></h3>
+            <p><span lang="zh">學生以團隊形式完成專題研究，並公開發表研究成果。</span><span lang="en">Student teams complete capstone research projects and present their findings publicly.</span></p>
+          </article>
+
+          <!-- Design thinking -->
+          <article class="work" data-cat="project global">
+            <div class="media-slot"><code>graph/work-design-thinking.jpg</code></div>
+            <div class="meta"><span><span lang="zh">工作坊</span><span lang="en">Workshop</span></span></div>
+            <h3><span lang="zh">設計思考工作坊</span><span lang="en">Design Thinking Workshop</span></h3>
+            <p><span lang="zh">約翰霍普金斯大學凱瑞商學院 Laurie Churchman 教授為本系學生講授設計思考，培養創新創業所需能力。</span><span lang="en">Professor Laurie Churchman of the Johns Hopkins Carey Business School led a design thinking workshop to strengthen students' creative problem-solving.</span></p>
+          </article>
+
+          <!-- Farm practice -->
+          <article class="work" data-cat="practicum">
+            <div class="media-slot"><code>graph/work-farm-practice.jpg</code></div>
+            <div class="meta"><span><span lang="zh">實務學習</span><span lang="en">Field Learning</span></span></div>
+            <h3><span lang="zh">農業實作課程</span><span lang="en">Farm Practice Course</span></h3>
+            <p><span lang="zh">為學習農業經濟與農業行銷，學生至國立花蓮高農參加農業課程，親身體驗種植過程。</span><span lang="en">To study agricultural economics and marketing, students took farming classes at National Hualien Agricultural Senior High School.</span></p>
+          </article>
+
+          <!-- Cultural exchange -->
+          <article class="work" data-cat="global">
+            <div class="media-slot"><code>graph/work-cultural-exchange.jpg</code></div>
+            <div class="meta"><span><span lang="zh">國際交流</span><span lang="en">Global</span></span></div>
+            <h3><span lang="zh">本國生與外籍生文化交流</span><span lang="en">Cross-Cultural Exchange</span></h3>
+            <p><span lang="zh">於花蓮鯉魚潭參加獨木舟課程，並透過團體活動增進本國生與外籍生的情誼。</span><span lang="en">Local and international students kayak together at Liyu Lake in Hualien and build friendships through group activities.</span></p>
+          </article>
+
+          <!-- Podcast -->
+          <article class="work" data-cat="media project">
+            <div class="media-slot"><code>graph/work-podcast.jpg</code></div>
+            <div class="meta"><span><span lang="zh">影音作品</span><span lang="en">Media</span></span><span class="yr">113-2</span></div>
+            <h3><span lang="zh">自媒體傳播：Podcast 品牌製作</span><span lang="en">Self-Media: Podcast Brand Production</span></h3>
+            <p><span lang="zh">「自媒體傳播」課程學生作品集，學生規劃並製作屬於自己的 Podcast 品牌。</span><span lang="en">A portfolio from the Self-Media Communication course, in which students planned and produced their own podcast brands.</span></p>
+            <div class="links"><a href="https://mdm.tcu.edu.tw/p/405-1021-65601,c3692.php?Lang=zh-tw" target="_blank" rel="noopener"><span lang="zh">查看作品集</span><span lang="en">View portfolio</span> ↗</a></div>
+          </article>
+
+          <!-- Smart business lab -->
+          <article class="work" data-cat="project">
+            <div class="media-slot"><code>graph/work-sbi-lab.jpg</code></div>
+            <div class="meta"><span><span lang="zh">研究室</span><span lang="en">Research Lab</span></span></div>
+            <h3><span lang="zh">智慧商情研究室</span><span lang="en">Smart Business Intelligence Lab</span></h3>
+            <p><span lang="zh">學生參與商業情報與數據分析相關研究與實作。</span><span lang="en">Students take part in business intelligence and data analysis research.</span></p>
+            <div class="links"><a href="https://sites.google.com/view/sbilab" target="_blank" rel="noopener"><span lang="zh">研究室網站</span><span lang="en">Lab website</span> ↗</a></div>
+          </article>
+
+        </div>
+        <p class="empty-msg"><span lang="zh">此分類目前沒有作品。</span><span lang="en">No works in this category yet.</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 02 Social enterprise films ============ -->
+  <section id="agrihubbers">
+    <div class="wrap row">
+      <div class="label"><span class="no">02</span><span lang="zh">社企專題</span><span lang="en">Social Enterprise</span></div>
+      <div>
+        <h2><span lang="zh">東部生活型態：社企聚落專題</span><span lang="en">Eastern Taiwan lifestyles: social enterprise projects</span></h2>
+        <p class="muted" style="margin-bottom:28px">
+          <span lang="zh">學生走訪花東在地農業與社會企業，以影像紀錄他們的故事與經營模式（Agrihubbers 系列）。</span>
+          <span lang="en">Students visited local farms and social enterprises in eastern Taiwan and documented their stories and business models on film (the Agrihubbers series).</span>
+        </p>
+        <ul class="video-list">
+          <li><a href="https://www.youtube.com/watch?v=_IUePzrWFY8" target="_blank" rel="noopener"><span class="idx">01</span><span class="t"><span lang="zh">明記咖啡：後山築夢</span><span lang="en">Mingji Coffee: Building Dreams in the East</span><small>Agrihubbers</small></span><span class="go">YouTube ↗</span></a></li>
+          <li><a href="https://www.youtube.com/watch?v=kStKwiuZUmQ" target="_blank" rel="noopener"><span class="idx">02</span><span class="t"><span lang="zh">夏田農業教室</span><span lang="en">Xiatian Farming Classroom</span><small>Agrihubbers</small></span><span class="go">YouTube ↗</span></a></li>
+          <li><a href="https://www.youtube.com/watch?v=NvoRJ9TxaPM" target="_blank" rel="noopener"><span class="idx">03</span><span class="t"><span lang="zh">稻寶地：幸福農九寶插秧</span><span lang="en">Daobaodi: Rice Planting Day</span><small>Agrihubbers</small></span><span class="go">YouTube ↗</span></a></li>
+          <li><a href="https://www.youtube.com/watch?v=w4BZwo7l6Ow" target="_blank" rel="noopener"><span class="idx">04</span><span class="t"><span lang="zh">湘守合：忘齡農夫</span><span lang="en">Xiangshouhe: The Ageless Farmers</span><small>Agrihubbers</small></span><span class="go">YouTube ↗</span></a></li>
+          <li><a href="https://www.youtube.com/watch?v=mrTlgtR-4Tc" target="_blank" rel="noopener"><span class="idx">05</span><span class="t"><span lang="zh">為什麼需要 Agrihubbers</span><span lang="en">Why You Need Agrihubbers</span><small>Agrihubbers</small></span><span class="go">YouTube ↗</span></a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 03 Featured film (reserved) ============ -->
+  <section class="dark">
+    <div class="wrap row">
+      <div class="label"><span class="no">03</span><span lang="zh">作品影片</span><span lang="en">Showcase Film</span></div>
+      <div>
+        <h2><span lang="zh">學生作品影片</span><span lang="en">Student showcase film</span></h2>
+        <p class="muted" style="margin-bottom:28px">
+          <span lang="zh">本學期課程拍攝的學生作品影片將於完成後上架。</span>
+          <span lang="en">A student showcase film produced in this semester's classes will be added here once completed.</span>
+        </p>
+        <!-- VIDEO SLOT — replace with:
+             <video src="graph/student-showcase.mp4" controls poster="graph/student-showcase-poster.jpg"></video> -->
+        <div class="media-slot">
+          <strong><span lang="zh">學生作品影片（預留）</span><span lang="en">Showcase video (placeholder)</span></strong>
+          <code>graph/student-showcase.mp4</code>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 04 Photo gallery (reserved) ============ -->
+  <section id="gallery">
+    <div class="wrap row">
+      <div class="label"><span class="no">04</span><span lang="zh">活動相簿</span><span lang="en">Gallery</span></div>
+      <div>
+        <h2><span lang="zh">本學期活動紀錄</span><span lang="en">This semester in photos</span></h2>
+        <p class="muted" style="margin-bottom:28px">
+          <span lang="zh">以下空間預留給本學期課程中拍攝的照片。</span>
+          <span lang="en">This space is reserved for photographs taken during this semester's classes.</span>
+        </p>
+        <!-- PHOTO SLOTS — replace each div with <img src="graph/gallery-0X.jpg" alt="..." style="width:100%;height:100%;object-fit:cover"> -->
+        <div class="gallery">
+          <div class="media-slot wide"><code>graph/gallery-01.jpg</code></div>
+          <div class="media-slot"><code>graph/gallery-02.jpg</code></div>
+          <div class="media-slot"><code>graph/gallery-03.jpg</code></div>
+          <div class="media-slot"><code>graph/gallery-04.jpg</code></div>
+          <div class="media-slot"><code>graph/gallery-05.jpg</code></div>
+          <div class="media-slot wide"><code>graph/gallery-06.jpg</code></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 05 CTA ============ -->
+  <section class="cta">
+    <div class="wrap row">
+      <div class="label"><span class="no">05</span><span lang="zh">更多</span><span lang="en">More</span></div>
+      <div>
+        <h2><span lang="zh">認識更多經管系</span><span lang="en">Discover more</span></h2>
+        <p>
+          <span lang="zh">回到系所首頁認識我們的教育目標與教學設備，或前往官方網站查看完整學習成果。</span>
+          <span lang="en">Return to the homepage to learn about our goals and facilities, or visit the official site for the full archive of learning outcomes.</span>
+        </p>
+        <div class="cta-links">
+          <a href="index.html"><span><span lang="zh">← 返回系所簡介</span><span lang="en">← Back to About</span></span></a>
+          <a href="https://mdm.tcu.edu.tw/p/412-1021-3692.php?Lang=zh-tw" target="_blank" rel="noopener"><span><span lang="zh">學習成果</span><span lang="en">Learning outcomes</span></span><span>↗</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ Footer ============ -->
+<footer class="site" id="contact">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <div class="big"><span lang="zh">慈濟大學<br>經營管理學系</span><span lang="en">Department of Business Management<br>Tzu Chi University</span></div>
+        <p>
+          <span lang="zh">970 花蓮市介仁街 67 號</span><span lang="en">No. 67, Jieren St., Hualien City 970, Taiwan</span><br>
+          <span lang="zh">電話</span><span lang="en">Tel</span> 03-857-2677 ext. 31682<br>
+          <a href="mailto:ss62@gms.tcu.edu.tw">ss62@gms.tcu.edu.tw</a>
+        </p>
+      </div>
+      <div>
+        <h4><span lang="zh">網站導覽</span><span lang="en">Explore</span></h4>
+        <ul>
+          <li><a href="index.html"><span lang="zh">系所簡介</span><span lang="en">About</span></a></li>
+          <li><a href="studentworks.html"><span lang="zh">學生作品</span><span lang="en">Student Works</span></a></li>
+          <li><a href="https://mdm.tcu.edu.tw/p/412-1021-3692.php?Lang=zh-tw" target="_blank" rel="noopener"><span lang="zh">學習成果</span><span lang="en">Learning Outcomes</span> ↗</a></li>
+          <li><a href="https://mdm.tcu.edu.tw/" target="_blank" rel="noopener"><span lang="zh">系所官方網站</span><span lang="en">Official Website</span> ↗</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4><span lang="zh">社群媒體</span><span lang="en">Follow</span></h4>
+        <ul>
+          <li><a href="https://www.instagram.com/tcu_business_management/" target="_blank" rel="noopener">Instagram ↗</a></li>
+          <li><a href="https://www.youtube.com/@_tcust5687" target="_blank" rel="noopener">YouTube ↗</a></li>
+          <li><a href="https://www.facebook.com/profile.php?id=100086684253354" target="_blank" rel="noopener">Facebook ↗</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© 2026 <span lang="zh">慈濟大學經營管理學系</span><span lang="en">Department of Business Management, Tzu Chi University</span></span>
+      <span><span lang="zh">網頁設計課程專題</span><span lang="en">Web design course project</span></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ---------- Language switch (shared with index.html via localStorage) ----------
+  const root = document.documentElement;
+  const langButtons = document.querySelectorAll('[data-set-lang]');
+  function setLang(lang) {
+    root.setAttribute('data-lang', lang);
+    root.setAttribute('lang', lang === 'zh' ? 'zh-Hant-TW' : 'en');
+    langButtons.forEach(b => b.setAttribute('aria-pressed', b.dataset.setLang === lang));
+    try { localStorage.setItem('site-lang', lang); } catch (e) {}
+  }
+  let saved = null;
+  try { saved = localStorage.getItem('site-lang'); } catch (e) {}
+  setLang(saved === 'en' ? 'en' : 'zh');
+  langButtons.forEach(b => b.addEventListener('click', () => setLang(b.dataset.setLang)));
+
+  // ---------- Category filter ----------
+  const filterButtons = document.querySelectorAll('[data-filter]');
+  const works = document.querySelectorAll('.work');
+  const emptyMsg = document.querySelector('.empty-msg');
+  filterButtons.forEach(btn => btn.addEventListener('click', () => {
+    const f = btn.dataset.filter;
+    filterButtons.forEach(b => b.setAttribute('aria-pressed', b === btn));
+    let shown = 0;
+    works.forEach(w => {
+      const match = f === 'all' || w.dataset.cat.split(' ').includes(f);
+      w.hidden = !match;
+      if (match) shown++;
+    });
+    emptyMsg.style.display = shown ? 'none' : 'block';
+  }));
+
+  // ---------- Mobile menu ----------
+  const menuBtn = document.querySelector('.menu-btn');
+  const nav = document.querySelector('nav.main');
+  menuBtn.addEventListener('click', () => {
+    const open = nav.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', open);
+  });
+  nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    nav.classList.remove('open');
+    menuBtn.setAttribute('aria-expanded', false);
+  }));
+</script>
+</body>
+</html>
