@@ -182,6 +182,12 @@
     .video-list a { grid-template-columns: 36px 1fr; }
     .video-list .go { display: none; }
   }
+  /* Embedded video */
+  .video-frame { position: relative; aspect-ratio: 16 / 9; background: var(--grey-900); }
+  .video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .video-note { margin-top: 14px; font-size: 14px; }
+  .video-note a { color: var(--white); font-weight: 700; text-decoration: none; border-bottom: 1px solid var(--grey-400); }
+  .video-note a:hover { color: #ff8a9a; border-color: #ff8a9a; }
 </style>
 </head>
 <body>
@@ -408,22 +414,24 @@
     </div>
   </section>
 
-  <!-- ============ 03 Featured film (reserved) ============ -->
-  <section class="dark">
+  <!-- ============ 03 Featured film ============ -->
+  <section class="dark" id="film">
     <div class="wrap row">
       <div class="label"><span class="no">03</span><span lang="zh">作品影片</span><span lang="en">Showcase Film</span></div>
       <div>
-        <h2><span lang="zh">學生作品影片</span><span lang="en">Student showcase film</span></h2>
+        <h2><span lang="zh">印尼異國蔬食</span><span lang="en">Indonesian Vegetarian Cuisine</span></h2>
         <p class="muted" style="margin-bottom:28px">
-          <span lang="zh">本學期課程拍攝的學生作品影片將於完成後上架。</span>
-          <span lang="en">A student showcase film produced in this semester's classes will be added here once completed.</span>
+          <span lang="zh">印尼學生將家鄉美食轉化為美味蔬食，並學以致用，透過網路行銷推廣家鄉傳統小吃。</span>
+          <span lang="en">Indonesian students turned dishes from home into vegetarian cuisine, then put their marketing skills to work promoting these traditional foods online.</span>
         </p>
-        <!-- VIDEO SLOT — replace with:
-             <video src="graph/student-showcase.mp4" controls poster="graph/student-showcase-poster.jpg"></video> -->
-        <div class="media-slot">
-          <strong><span lang="zh">學生作品影片（預留）</span><span lang="en">Showcase video (placeholder)</span></strong>
-          <code>graph/student-showcase.mp4</code>
+        <div class="video-frame">
+          <iframe src="https://www.youtube-nocookie.com/embed/pKylQ9I6wzU" title="印尼異國蔬食 Indonesian Vegetarian Cuisine" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
+        <p class="video-note">
+          <a href="https://www.youtube.com/watch?v=pKylQ9I6wzU" target="_blank" rel="noopener"><span lang="zh">在 YouTube 上觀看</span><span lang="en">Watch on YouTube</span> ↗</a>
+        </p>
+        <!-- Future: a film produced in class can be added here with
+             <video src="graph/student-showcase.mp4" controls poster="graph/student-showcase-poster.jpg"></video> -->
       </div>
     </div>
   </section>
