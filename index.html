@@ -169,6 +169,15 @@
     .cta-links a + a, .hero-links a + a { padding-left: 0; border-left: none; }
     .hero p.lead, .intro { font-size: 17px; }
   }
+  /* Photos */
+  figure { margin: 0; }
+  figcaption { font-size: 13px; color: var(--grey-600); margin-top: 10px; padding-left: 12px; border-left: 3px solid var(--red); line-height: 1.5; }
+  .hero-figure { align-self: center; padding: 48px 0 48px 48px; }
+  .hero-figure img { width: 100%; aspect-ratio: 510 / 394; object-fit: cover; }
+  .about-split { grid-template-columns: 1fr !important; }
+  .about-figure { margin-top: 48px; }
+  .about-figure img { width: 100%; height: auto; }
+  @media (max-width: 860px) { .hero-figure { padding: 0 0 40px; } }
 </style>
 </head>
 <body>
@@ -226,12 +235,10 @@
           <a href="https://mdm.tcu.edu.tw/p/412-1021-3692.php?Lang=zh-tw" target="_blank" rel="noopener"><span><span lang="zh">學習成果</span><span lang="en">Learning Outcomes</span></span><span class="arrow">↗</span></a>
         </div>
       </div>
-      <!-- PHOTO SLOT — replace this div with:
-           <img src="graph/hero-campus.jpg" alt="Tzu Chi University campus" style="width:100%;height:100%;object-fit:cover"> -->
-      <div class="media-slot">
-        <strong><span lang="zh">主視覺照片（預留）</span><span lang="en">Hero photo (placeholder)</span></strong>
-        <code>graph/hero-campus.jpg</code>
-      </div>
+      <figure class="hero-figure">
+        <img src="graph/hero-department.jpg" width="510" height="394" alt="經營管理學系師生手持系旗合影 Students and faculty of the Department of Business Management holding the department banner">
+        <figcaption><span lang="zh">經營管理學系師生校外參訪合影</span><span lang="en">Students and faculty on a department field trip</span></figcaption>
+      </figure>
     </div>
   </div>
 
@@ -259,12 +266,11 @@
               <li><span lang="zh">創新與永續經營</span><span lang="en">Innovation &amp; Sustainability</span></li>
             </ul>
           </div>
-          <!-- PHOTO SLOT — replace with <img src="graph/about-classroom.jpg" alt="..."> -->
-          <div class="media-slot">
-            <strong><span lang="zh">系所照片（預留）</span><span lang="en">Department photo (placeholder)</span></strong>
-            <code>graph/about-classroom.jpg</code>
-          </div>
         </div>
+        <figure class="about-figure">
+          <img src="graph/about-family.jpg" width="1174" height="419" loading="lazy" alt="經營管理學系全體師生大合照 Group photo of Department of Business Management students and faculty">
+          <figcaption><span lang="zh">我們都是一家人：經營管理學系師生大合照</span><span lang="en">We are one family: students and faculty of the department</span></figcaption>
+        </figure>
       </div>
     </div>
   </section>
@@ -400,6 +406,7 @@
         <ul>
           <li><a href="index.html"><span lang="zh">系所簡介</span><span lang="en">About</span></a></li>
           <li><a href="studentworks.html"><span lang="zh">學生作品</span><span lang="en">Student Works</span></a></li>
+          <li><a href="airecord.html"><span lang="zh">AI 協作紀錄</span><span lang="en">AI Collaboration Record</span></a></li>
           <li><a href="https://mdm.tcu.edu.tw/p/412-1021-3692.php?Lang=zh-tw" target="_blank" rel="noopener"><span lang="zh">學習成果</span><span lang="en">Learning Outcomes</span> ↗</a></li>
           <li><a href="https://mdm.tcu.edu.tw/" target="_blank" rel="noopener"><span lang="zh">系所官方網站</span><span lang="en">Official Website</span> ↗</a></li>
         </ul>
