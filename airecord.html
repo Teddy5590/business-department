@@ -10,6 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
   :root {
+    --gold: #C8A45D;
     --red: #a31f34; --red-dark: #7f1727; --black: #111111; --grey-900: #1e1e1e;
     --grey-600: #5f6062; --grey-400: #8a8b8c; --grey-200: #d9d9d9; --grey-100: #f2f2f2; --white: #ffffff;
     --font: "Inter", "Noto Sans TC", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -130,7 +131,58 @@
   }
   .lang-toggle button { white-space: nowrap; }
   @media (max-width: 560px) { .brand-name .bn-main { font-size: 15px; } }
+  /* ================= Motion layer =================
+     Text reveals, scroll reveals, parallax, marquee, scroll progress.
+     All inline; respects prefers-reduced-motion; content stays visible without JS. */
+  .motion-wait main { opacity: 0; }
+  .progress { position: fixed; top: 0; left: 0; width: 100%; height: 3px; background: var(--red); transform-origin: 0 50%; transform: scaleX(0); z-index: 100; pointer-events: none; }
+  .motion .sp-w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .1em; margin-bottom: -.1em; }
+  .motion .sp-i { display: inline-block; transform: translate3d(0, 108%, 0); transition: transform .95s cubic-bezier(.19, 1, .22, 1); transition-delay: calc(var(--i, 0) * 32ms); }
+  .motion .in .sp-i { transform: none; }
+  .motion .rv { opacity: 0; transform: translate3d(0, 40px, 0); transition: opacity .9s ease, transform 1s cubic-bezier(.19, 1, .22, 1); transition-delay: calc(var(--d, 0) * 90ms); }
+  .motion .rv.in { opacity: 1; transform: none; }
+  .motion .banner-rule, .motion .goal, .motion .entry { transform-origin: 0 50%; }
+  .motion .banner-rule.rv { opacity: 1; transform: scaleX(0); }
+  .motion .banner-rule.rv.in { transform: scaleX(1); }
+  .pwrap { display: block; overflow: hidden; }
+  .pwrap > img { transform: translate3d(0, var(--py, 0px), 0) scale(1.12); will-change: transform; }
+  .banner-media { will-change: transform; }
+  .motion .banner-media img { transform: scale(1.16); transition: transform 2.6s cubic-bezier(.19, 1, .22, 1); }
+  .motion .banner.in .banner-media img { transform: scale(1); }
+
+  /* Hover polish */
+  .facility, .work { transition: border-color .3s; }
+  .facility .media-slot, .work .media-slot { transition: background-color .4s; }
+  .facility:hover .media-slot, .work:hover .media-slot { background-color: #e8e8e8; }
+  .facility h3, .work h3 { transition: color .25s; }
+  .facility:hover h3, .work:hover h3 { color: var(--red); }
+  .hero-links a .arrow, .cta-links a > span:last-child, .video-list .go { transition: transform .35s cubic-bezier(.19, 1, .22, 1); }
+  .hero-links a:hover .arrow, .cta-links a:hover > span:last-child, .video-list a:hover .go { transform: translateX(6px); }
+  nav.main a { background: linear-gradient(var(--red), var(--red)) 14px 100% / 0 2px no-repeat; transition: background-size .35s cubic-bezier(.19, 1, .22, 1), color .2s; }
+  nav.main a:hover { background-size: calc(100% - 28px) 2px; }
+
+  /* Marquee */
+  .marquee { background: var(--black); color: var(--white); overflow: hidden; border-bottom: 1px solid var(--black); padding: 26px 0; }
+  .marquee-track { display: flex; width: max-content; animation: marquee 45s linear infinite; }
+  .marquee:hover .marquee-track { animation-play-state: paused; }
+  .mq-group { display: flex; align-items: center; flex-shrink: 0; }
+  .mq-group span.it { font-size: clamp(26px, 4vw, 54px); font-weight: 800; letter-spacing: -.01em; white-space: nowrap; padding: 0 28px; }
+  .mq-group span.it:nth-child(4n+3) { color: transparent; -webkit-text-stroke: 1.5px #ffffff; }
+  .mq-group span.dot { color: var(--gold, #C8A45D); font-size: clamp(18px, 2.4vw, 30px); }
+  @keyframes marquee { to { transform: translateX(-50%); } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track { animation: none; }
+    .progress { display: none; }
+  }
 </style>
+<script>
+  /* Motion: hide the page for a moment until the reveal script is ready (avoids a flash). */
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.documentElement.classList.add('motion-wait');
+    setTimeout(function () { document.documentElement.classList.remove('motion-wait'); }, 2000);
+  }
+</script>
 </head>
 <body>
 
@@ -391,6 +443,128 @@ https://teddy5590.github.io/business-department/studentworks.html</blockquote>
     nav.classList.remove('open');
     menuBtn.setAttribute('aria-expanded', false);
   }));
+</script>
+<script>
+/* ================= Motion layer (vanilla JS, no libraries) ================= */
+(function () {
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const root = document.documentElement;
+
+  // Scroll progress bar
+  const bar = document.createElement('div'); bar.className = 'progress'; document.body.appendChild(bar);
+
+  if (reduce || !('IntersectionObserver' in window)) {
+    root.classList.remove('motion-wait');
+    window.addEventListener('scroll', () => {
+      const h = document.documentElement.scrollHeight - innerHeight;
+      bar.style.transform = 'scaleX(' + (h > 0 ? scrollY / h : 0) + ')';
+    }, { passive: true });
+    return;
+  }
+  root.classList.add('motion');
+
+  // ---- 1. Split headings into masked characters (CJK) / words (Latin) ----
+  const TOKEN = /[⺀-鿿豈-﫿＀-￯　-〿]|[^\s⺀-鿿豈-﫿＀-￯　-〿]+|\s+/g;
+  function split(el) {
+    let i = 0;
+    (function walk(node) {
+      [...node.childNodes].forEach(n => {
+        if (n.nodeType === 3) {
+          const frag = document.createDocumentFragment();
+          (n.textContent.match(TOKEN) || []).forEach(t => {
+            if (/^\s+$/.test(t)) { frag.appendChild(document.createTextNode(' ')); return; }
+            const w = document.createElement('span'); w.className = 'sp-w';
+            const inner = document.createElement('span'); inner.className = 'sp-i'; inner.textContent = t;
+            inner.style.setProperty('--i', i++); w.appendChild(inner); frag.appendChild(w);
+          });
+          n.replaceWith(frag);
+        } else if (n.nodeType === 1 && n.tagName !== 'BR') {
+          if (n.hasAttribute('lang')) i = 0;      // each language animates from its own start
+          walk(n);
+        }
+      });
+    })(el);
+  }
+  const heads = document.querySelectorAll('h2, .banner h1, .page-head h1');
+  heads.forEach(split);
+
+  // ---- 2. Scroll reveals with sibling stagger ----
+  const REVEAL = [
+    '.banner-kicker', '.banner-rule', '.banner-sub', '.intro-strip .lead', '.hero-links a',
+    '.label', '.intro', '.tags li', '.goal', '.facility', 'figure', '.media-slot:not(.facility .media-slot):not(.work .media-slot)',
+    '.video-frame', '.video-note', '.muted', '.work', '.filters', '.video-list li', '.stat', '.crumbs', '.kicker', '.page-head .lead',
+    '.awards li', '.sustain-text > p', '.sustain-text > h3', '.cta p', '.cta-links a', '.gallery > *',
+    '.fact', '.entry', 'table tbody tr', '.decisions li', '.reflection p', 'footer .cols > div'
+  ].join(',');
+  const items = [...document.querySelectorAll(REVEAL)].filter(el => !el.closest('.rv') || el.classList.contains('rv'));
+  const seen = new Set();
+  items.forEach(el => {
+    if (seen.has(el) || [...seen].some(s => s.contains(el))) return;   // don't nest reveals
+    seen.add(el); el.classList.add('rv');
+  });
+  // stagger index among revealed siblings
+  seen.forEach(el => {
+    const sibs = [...el.parentElement.children].filter(c => seen.has(c));
+    el.style.setProperty('--d', Math.min(sibs.indexOf(el), 8));
+  });
+  // banner pieces follow the title
+  const delays = { '.banner-kicker': 0, '.banner-rule': 7, '.banner-sub': 8 };
+  Object.keys(delays).forEach(sel => document.querySelectorAll(sel).forEach(e => e.style.setProperty('--d', delays[sel])));
+
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('in'); io.unobserve(e.target);
+      if (e.target.matches('.stat')) countUp(e.target);
+    });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+  void document.body.offsetHeight;                 // apply hidden states before anything reveals
+  root.classList.remove('motion-wait');
+  requestAnimationFrame(() => requestAnimationFrame(() => [...heads, ...seen].forEach(el => io.observe(el))));
+
+  // ---- 3. Banner intro + parallax ----
+  const banner = document.querySelector('.banner');
+  let bannerMedia = null;
+  if (banner) {
+    const img = banner.querySelector('img');
+    bannerMedia = document.createElement('div'); bannerMedia.className = 'banner-media';
+    img.replaceWith(bannerMedia); bannerMedia.appendChild(img);
+    requestAnimationFrame(() => requestAnimationFrame(() => banner.classList.add('in')));
+  }
+  const pImgs = [...document.querySelectorAll('.about-figure img, .space-figure img, .group-figure img, .about-side img')].map(img => {
+    const w = document.createElement('span'); w.className = 'pwrap'; img.replaceWith(w); w.appendChild(img); return w;
+  });
+
+  // ---- 4. Count-up numbers ----
+  function countUp(stat) {
+    const b = stat.querySelector('b'); if (!b || b.children.length) return;
+    const m = b.textContent.trim().match(/^(\d+)(\+?)$/); if (!m) return;
+    const end = +m[1], suffix = m[2], t0 = performance.now(), dur = 1400;
+    (function tick(t) {
+      const p = Math.min((t - t0) / dur, 1), e = 1 - Math.pow(1 - p, 3);
+      b.textContent = Math.round(end * e) + suffix;
+      if (p < 1) requestAnimationFrame(tick);
+    })(t0);
+  }
+
+  // ---- 5. Scroll-linked updates (progress bar + parallax) ----
+  let ticking = false;
+  function update() {
+    ticking = false;
+    const h = document.documentElement.scrollHeight - innerHeight;
+    bar.style.transform = 'scaleX(' + (h > 0 ? scrollY / h : 0) + ')';
+    if (bannerMedia && scrollY < innerHeight * 1.2) bannerMedia.style.transform = 'translate3d(0,' + (scrollY * 0.3).toFixed(1) + 'px,0)';
+    pImgs.forEach(w => {
+      const r = w.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > innerHeight) return;
+      const prog = (r.top + r.height / 2 - innerHeight / 2) / innerHeight;
+      w.firstElementChild.style.setProperty('--py', (prog * r.height * -0.05).toFixed(1) + 'px');
+    });
+  }
+  window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+})();
 </script>
 </body>
 </html>
