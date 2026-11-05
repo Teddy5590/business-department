@@ -174,12 +174,39 @@
   figcaption { font-size: 13px; color: var(--grey-600); margin-top: 10px; padding-left: 12px; border-left: 3px solid var(--red); line-height: 1.5; }
   .hero-figure { align-self: center; padding: 48px 0 48px 48px; }
   .hero-figure img { width: 100%; aspect-ratio: 510 / 394; object-fit: cover; }
-  .about-split { grid-template-columns: 1fr !important; }
   .about-figure { margin-top: 48px; }
   .about-figure img { width: 100%; height: auto; }
   @media (max-width: 860px) { .hero-figure { padding: 0 0 40px; } }
   .space-figure { margin-bottom: 40px; }
   .space-figure img { width: 100%; height: auto; }
+  /* ---------- 5:1 hero banner ---------- */
+  :root { --gold: #C8A45D; }
+  .banner { position: relative; background: #0b0b0b; overflow: hidden; border-bottom: 1px solid var(--black); }
+  .banner img { width: 100%; aspect-ratio: 5 / 1; min-height: 300px; object-fit: cover; object-position: 70% 50%; }
+  .banner::after { content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(90deg, rgba(11,11,11,.96) 0%, rgba(11,11,11,.9) 34%, rgba(11,11,11,.35) 58%, rgba(11,11,11,0) 78%); }
+  .banner-text { position: absolute; inset: 0; z-index: 1; display: flex; flex-direction: column; justify-content: center; left: 0; right: 0; }
+  .banner-kicker { color: var(--gold); font-size: 13px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; }
+  .banner h1 { color: #fff; font-size: clamp(34px, 5vw, 72px); font-weight: 900; line-height: 1.1; letter-spacing: .03em; margin: 12px 0 14px; max-width: 46%; }
+  html[data-lang="en"] .banner h1 { letter-spacing: -.02em; font-size: clamp(28px, 3.6vw, 52px); max-width: 52%; }
+  .banner-rule { width: 64px; height: 3px; background: var(--gold); }
+  .banner-sub { color: #e6e6e6; font-size: clamp(15px, 1.6vw, 22px); font-weight: 600; margin-top: 12px; }
+  .intro-strip { border-bottom: 1px solid var(--black); }
+  .intro-strip .wrap { display: grid; grid-template-columns: 7fr 5fr; gap: 48px; align-items: end; padding-top: 48px; padding-bottom: 48px; }
+  .intro-strip .lead { font-size: 19px; color: var(--grey-600); }
+  .intro-strip .hero-links { margin-top: 0; }
+  .about-side img { width: 100%; height: auto; }
+  @media (max-width: 860px) {
+    .banner h1 { max-width: 70%; }
+    .banner::after { background: linear-gradient(90deg, rgba(11,11,11,.95) 0%, rgba(11,11,11,.8) 50%, rgba(11,11,11,.25) 85%); }
+    .intro-strip .wrap { grid-template-columns: 1fr; gap: 24px; }
+  }
+  .lang-toggle button { white-space: nowrap; }
+  @media (max-width: 560px) {
+    .brand-name .bn-main { font-size: 15px; }
+    .banner-kicker { letter-spacing: .1em; font-size: 11px; max-width: 80%; }
+    .banner::after { background: linear-gradient(90deg, rgba(11,11,11,.95) 0%, rgba(11,11,11,.85) 60%, rgba(11,11,11,.35) 100%); }
+  }
 </style>
 </head>
 <body>
@@ -217,30 +244,29 @@
 
 <main>
 
-  <!-- ============ Hero ============ -->
-  <div class="hero">
+  <!-- ============ Hero banner (5:1) ============ -->
+  <div class="banner">
+    <!-- Banner photo: 1920 x 384 (5:1). Replace this file with your own banner shot later. -->
+    <img src="graph/banner_hero.jpg" width="1920" height="384" alt="經營管理學系同學參訪交流、聆聽簡報 Business Management students listening to a presentation on a visit">
+    <div class="banner-text wrap">
+      <div class="banner-kicker"><span lang="zh">慈濟大學 ・ 花蓮</span><span lang="en">Tzu Chi University · Hualien, Taiwan</span></div>
+      <h1><span lang="zh">經營管理學系</span><span lang="en">Department of Business Management</span></h1>
+      <div class="banner-rule"></div>
+      <p class="banner-sub"><span lang="zh">Department of Business Management</span><span lang="en">以人文為本，以實務為用</span></p>
+    </div>
+  </div>
+
+  <!-- Intro strip under the banner -->
+  <div class="intro-strip">
     <div class="wrap">
-      <div class="hero-text">
-        <div>
-          <div class="kicker"><span lang="zh">慈濟大學 ・ 花蓮</span><span lang="en">Tzu Chi University · Hualien, Taiwan</span></div>
-          <h1>
-            <span lang="zh">經營管理<br>學系</span>
-            <span lang="en">Department of<br>Business<br>Management</span>
-          </h1>
-          <p class="lead">
-            <span lang="zh">以人文為本，以實務為用。我們培育具備職場倫理、創意思考、團隊合作與跨文化視野的商管人才，實踐創新與永續的經營理念。</span>
-            <span lang="en">Grounded in humanity, driven by practice. We educate business professionals with workplace ethics, creative thinking, teamwork, and a cross-cultural outlook, committed to innovative and sustainable management.</span>
-          </p>
-        </div>
-        <div class="hero-links">
-          <a href="#about"><span><span lang="zh">認識本系</span><span lang="en">About the Department</span></span><span class="arrow">↓</span></a>
-          <a href="https://mdm.tcu.edu.tw/p/412-1021-3692.php?Lang=zh-tw" target="_blank" rel="noopener"><span><span lang="zh">學習成果</span><span lang="en">Learning Outcomes</span></span><span class="arrow">↗</span></a>
-        </div>
+      <p class="lead">
+        <span lang="zh">以人文為本，以實務為用。我們培育具備職場倫理、創意思考、團隊合作與跨文化視野的商管人才，實踐創新與永續的經營理念。</span>
+        <span lang="en">Grounded in humanity, driven by practice. We educate business professionals with workplace ethics, creative thinking, teamwork, and a cross-cultural outlook, committed to innovative and sustainable management.</span>
+      </p>
+      <div class="hero-links">
+        <a href="#about"><span><span lang="zh">認識本系</span><span lang="en">About the Department</span></span><span class="arrow">↓</span></a>
+        <a href="https://mdm.tcu.edu.tw/p/412-1021-3692.php?Lang=zh-tw" target="_blank" rel="noopener"><span><span lang="zh">學習成果</span><span lang="en">Learning Outcomes</span></span><span class="arrow">↗</span></a>
       </div>
-      <figure class="hero-figure">
-        <img src="graph/hero-department.jpg" width="510" height="394" alt="經營管理學系師生手持系旗合影 Students and faculty of the Department of Business Management holding the department banner">
-        <figcaption><span lang="zh">經營管理學系師生校外參訪合影</span><span lang="en">Students and faculty on a department field trip</span></figcaption>
-      </figure>
     </div>
   </div>
 
@@ -268,9 +294,13 @@
               <li><span lang="zh">創新與永續經營</span><span lang="en">Innovation &amp; Sustainability</span></li>
             </ul>
           </div>
+          <figure class="about-side">
+            <img src="graph/hero-department.jpg" width="1200" height="927" loading="lazy" alt="經營管理學系師生手持系旗合影 Students and faculty of the Department of Business Management holding the department banner">
+            <figcaption><span lang="zh">經營管理學系師生校外參訪合影</span><span lang="en">Students and faculty on a department field trip</span></figcaption>
+          </figure>
         </div>
         <figure class="about-figure">
-          <img src="graph/about-family.jpg" width="1174" height="419" loading="lazy" alt="經營管理學系全體師生大合照 Group photo of Department of Business Management students and faculty">
+          <img src="graph/about-family.jpg" width="1600" height="571" loading="lazy" alt="經營管理學系全體師生大合照 Group photo of Department of Business Management students and faculty">
           <figcaption><span lang="zh">我們都是一家人：經營管理學系師生大合照</span><span lang="en">We are one family: students and faculty of the department</span></figcaption>
         </figure>
       </div>
