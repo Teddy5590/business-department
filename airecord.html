@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW" data-lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 協作紀錄 AI Collaboration Record | 慈濟大學 經營管理學系</title>
+<meta name="description" content="AI Collaboration Record for the Department of Business Management website project.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #a31f34; --red-dark: #7f1727; --black: #111111; --grey-900: #1e1e1e;
+    --grey-600: #5f6062; --grey-400: #8a8b8c; --grey-200: #d9d9d9; --grey-100: #f2f2f2; --white: #ffffff;
+    --font: "Inter", "Noto Sans TC", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --mono: ui-monospace, Menlo, Consolas, monospace;
+    --max: 1240px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font); color: var(--black); background: var(--white); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 32px; }
+  html[data-lang="zh"] [lang="en"] { display: none !important; }
+  html[data-lang="en"] [lang="zh"] { display: none !important; }
+
+  /* Header (shared) */
+  header.site { position: sticky; top: 0; z-index: 50; background: var(--white); border-bottom: 1px solid var(--black); }
+  header.site .wrap { display: flex; align-items: center; justify-content: space-between; height: 76px; gap: 24px; }
+  .brand { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+  .brand-mark { display: flex; gap: 4px; height: 34px; align-items: stretch; }
+  .brand-mark i { display: block; width: 7px; background: var(--black); }
+  .brand-mark i:nth-child(2) { background: var(--red); }
+  .brand-mark i:nth-child(3) { background: var(--grey-400); height: 70%; align-self: flex-end; }
+  .brand-name { line-height: 1.2; }
+  .brand-name .bn-main { display: block; font-size: 17px; font-weight: 800; letter-spacing: -.01em; }
+  .brand-name .bn-sub { display: block; font-size: 12px; color: var(--grey-600); letter-spacing: .02em; }
+  nav.main ul { list-style: none; display: flex; gap: 2px; }
+  nav.main a { display: block; padding: 8px 14px; font-size: 14px; font-weight: 600; text-decoration: none; }
+  nav.main a:hover, nav.main a.active { color: var(--red); }
+  .head-tools { display: flex; align-items: center; gap: 10px; }
+  .lang-toggle { display: flex; border: 1px solid var(--black); }
+  .lang-toggle button { font: inherit; font-size: 13px; font-weight: 700; padding: 6px 12px; border: none; background: var(--white); color: var(--black); cursor: pointer; }
+  .lang-toggle button[aria-pressed="true"] { background: var(--black); color: var(--white); }
+  .menu-btn { display: none; font: inherit; font-size: 13px; font-weight: 700; padding: 6px 12px; border: 1px solid var(--black); background: var(--white); cursor: pointer; }
+
+  /* Page head */
+  .page-head { border-bottom: 1px solid var(--black); }
+  .page-head .wrap { padding-top: 72px; padding-bottom: 56px; }
+  .crumbs { font-size: 13px; color: var(--grey-600); margin-bottom: 26px; }
+  .crumbs a { text-decoration: none; font-weight: 600; color: var(--black); }
+  .kicker { font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--red); }
+  .page-head h1 { font-size: clamp(40px, 6vw, 80px); font-weight: 800; line-height: 1.05; letter-spacing: -.035em; margin: 18px 0 24px; }
+  html[data-lang="zh"] .page-head h1 { letter-spacing: .02em; line-height: 1.15; }
+  .page-head .lead { font-size: 19px; color: var(--grey-600); max-width: 760px; }
+  .facts { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 44px; border-top: 1px solid var(--black); }
+  .fact { padding: 16px 20px 0 0; font-size: 13px; color: var(--grey-600); }
+  .fact + .fact { padding-left: 20px; border-left: 1px solid var(--grey-200); }
+  .fact b { display: block; font-size: 16px; color: var(--black); }
+
+  /* Sections */
+  section { border-bottom: 1px solid var(--black); }
+  .row { display: grid; grid-template-columns: 3fr 9fr; gap: 48px; padding-top: 80px; padding-bottom: 80px; }
+  .label { font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+  .label .no { display: block; color: var(--red); font-size: 40px; letter-spacing: -.02em; font-weight: 800; line-height: 1; margin-bottom: 10px; }
+  h2 { font-size: clamp(28px, 3.4vw, 42px); font-weight: 800; letter-spacing: -.025em; line-height: 1.15; margin-bottom: 24px; }
+  html[data-lang="zh"] h2 { letter-spacing: .02em; }
+  .muted { color: var(--grey-600); }
+
+  /* Prompt log */
+  .entry { border-top: 4px solid var(--black); padding: 22px 0 40px; }
+  .entry:first-of-type { border-top-color: var(--red); }
+  .entry-head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+  .entry-head .step { font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--red); }
+  .entry-head .tag { font-size: 12px; font-weight: 700; padding: 2px 10px; border: 1px solid var(--black); }
+  .entry h3 { font-size: 22px; font-weight: 800; letter-spacing: -.01em; line-height: 1.3; margin: 8px 0 18px; }
+  .k { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--grey-400); margin: 18px 0 6px; }
+  blockquote.prompt { font-family: var(--mono); font-size: 14px; line-height: 1.7; background: var(--grey-100); border-left: 4px solid var(--black); padding: 16px 20px; white-space: pre-wrap; word-break: break-word; }
+  .entry p { color: var(--grey-900); }
+  .entry ul { margin: 4px 0 0 20px; color: var(--grey-900); }
+  .entry li { margin-bottom: 4px; }
+
+  /* Problems table */
+  table { width: 100%; border-collapse: collapse; font-size: 15px; }
+  th, td { text-align: left; vertical-align: top; padding: 14px 14px 14px 0; border-bottom: 1px solid var(--grey-200); }
+  th { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--grey-600); border-bottom: 1px solid var(--black); }
+  td:first-child { font-weight: 700; width: 30%; }
+
+  .reflection p + p { margin-top: 16px; }
+  .reflection p { font-size: 18px; max-width: 760px; }
+  .decisions { list-style: none; display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px 28px; margin-top: 8px; }
+  .decisions li { border-top: 1px solid var(--black); padding-top: 12px; }
+  .decisions b { display: block; font-size: 16px; }
+  .decisions span.d { font-size: 15px; color: var(--grey-600); }
+
+  /* Footer (shared) */
+  footer.site { background: var(--black); color: var(--grey-400); font-size: 14px; }
+  footer .cols { display: grid; grid-template-columns: 5fr 3fr 3fr; gap: 40px; padding: 64px 0 48px; }
+  footer h4 { color: var(--white); font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 16px; }
+  footer .big { color: var(--white); font-size: 22px; font-weight: 800; letter-spacing: -.01em; line-height: 1.3; margin-bottom: 16px; }
+  footer ul { list-style: none; }
+  footer li { margin-bottom: 8px; }
+  footer a { text-decoration: none; }
+  footer a:hover { color: var(--white); text-decoration: underline; }
+  .legal { border-top: 1px solid #333; padding: 22px 0 28px; font-size: 12px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+
+  @media (max-width: 1000px) {
+    .row { grid-template-columns: 1fr; gap: 24px; padding-top: 60px; padding-bottom: 60px; }
+    .label .no { font-size: 32px; }
+  }
+  @media (max-width: 860px) {
+    .menu-btn { display: block; }
+    nav.main { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--white); border-bottom: 1px solid var(--black); }
+    nav.main.open { display: block; }
+    nav.main ul { flex-direction: column; padding: 8px 16px 16px; }
+    nav.main a { padding: 14px 4px; border-bottom: 1px solid var(--grey-200); }
+    .facts { grid-template-columns: repeat(2, 1fr); }
+    .fact:nth-child(3) { padding-left: 0; border-left: none; }
+    footer .cols { grid-template-columns: 1fr; }
+    .decisions { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 560px) {
+    .wrap { padding: 0 16px; }
+    header.site .wrap { height: 64px; }
+    .brand-name .bn-sub { display: none; }
+    table, thead, tbody, tr, th, td { display: block; }
+    thead { display: none; }
+    td:first-child { width: auto; padding-bottom: 0; border-bottom: none; }
+    .page-head .lead, .reflection p { font-size: 17px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span class="brand-name">
+        <strong class="bn-main"><span lang="zh">經營管理學系</span><span lang="en">Business Management</span></strong>
+        <span class="bn-sub"><span lang="zh">慈濟大學</span><span lang="en">Tzu Chi University</span></span>
+      </span>
+    </a>
+    <nav class="main" aria-label="Main">
+      <ul>
+        <li><a href="index.html"><span lang="zh">系所簡介</span><span lang="en">About</span></a></li>
+        <li><a href="index.html#goals"><span lang="zh">教育目標</span><span lang="en">Goals</span></a></li>
+        <li><a href="index.html#facilities"><span lang="zh">教學設備</span><span lang="en">Facilities</span></a></li>
+        <li><a href="studentworks.html"><span lang="zh">學生作品</span><span lang="en">Student Works</span></a></li>
+        <li><a href="#contact"><span lang="zh">聯絡我們</span><span lang="en">Contact</span></a></li>
+      </ul>
+    </nav>
+    <div class="head-tools">
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button type="button" data-set-lang="zh" aria-pressed="true">中文</button>
+        <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <button class="menu-btn" type="button" aria-expanded="false"><span lang="zh">選單</span><span lang="en">Menu</span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <div class="page-head">
+    <div class="wrap">
+      <div class="crumbs"><a href="index.html"><span lang="zh">首頁</span><span lang="en">Home</span></a> / <span lang="zh">AI 協作紀錄</span><span lang="en">AI Collaboration Record</span></div>
+      <div class="kicker"><span lang="zh">網站工程師 ・ 課程專題</span><span lang="en">Website Engineer · Course Project</span></div>
+      <h1><span lang="zh">AI 協作紀錄</span><span lang="en">AI Collaboration Record</span></h1>
+      <p class="lead">
+        <span lang="zh">本頁記錄我在設計與發布本網站時，與 AI（Claude）合作的完整過程。以下列出我給 AI 的每一則提示（原文照錄），以及我使用該提示的原因、AI 的回應，和它如何影響我的設計決策。</span>
+        <span lang="en">This page documents how I worked with an AI assistant (Claude) to design and publish this website. It lists every prompt I gave the AI, word for word, along with why I used it, what the AI produced, and how that shaped my design decisions.</span>
+      </p>
+      <div class="facts">
+        <div class="fact"><b>Claude (Anthropic)</b><span lang="zh">使用的 AI 工具</span><span lang="en">AI tool used</span></div>
+        <div class="fact"><b>HTML · CSS · JavaScript</b><span lang="zh">內部 CSS／JS，單一檔案</span><span lang="en">internal CSS/JS, single files</span></div>
+        <div class="fact"><b>GitHub Pages</b><span lang="zh">發布平台</span><span lang="en">publishing platform</span></div>
+        <div class="fact"><b>2026.10</b><span lang="zh">開發期間</span><span lang="en">development period</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 01 Prompt log ============ -->
+  <section id="log">
+    <div class="wrap row">
+      <div class="label"><span class="no">01</span><span lang="zh">提示紀錄</span><span lang="en">Prompt Log</span></div>
+      <div>
+        <h2><span lang="zh">每一則提示與說明</span><span lang="en">Every prompt, with notes</span></h2>
+
+        <!-- Prompt 1 -->
+        <article class="entry">
+          <div class="entry-head"><span class="step"><span lang="zh">提示 1</span><span lang="en">Prompt 1</span></span><span class="tag"><span lang="zh">專案啟動</span><span lang="en">Kick-off</span></span></div>
+          <h3><span lang="zh">提供作業說明，開始合作</span><span lang="en">Sharing the brief and starting the project</span></h3>
+          <div class="k"><span lang="zh">提示（原文）</span><span lang="en">Prompt (verbatim)</span></div>
+          <blockquote class="prompt">[Attached: Department Website Design Project brief and assessment criteria]
+Lets do this together</blockquote>
+          <div class="k"><span lang="zh">AI 回應</span><span lang="en">AI response</span></div>
+          <p><span lang="zh">AI 沒有直接產生網站，而是先問我三個問題：網站要介紹哪個系、想要的視覺風格，以及要逐步合作還是先產生完整草稿。</span><span lang="en">Instead of generating a site right away, the AI asked me three questions: which department the site was for, which visual direction I wanted, and whether to work step by step or start from a full draft.</span></p>
+          <div class="k"><span lang="zh">說明與反思</span><span lang="en">Notes / reflection</span></div>
+          <p><span lang="zh">我先把完整的作業說明交給 AI，讓它了解評分標準（index.html、studentworks.html、graph 資料夾、GitHub Pages 發布）。AI 先釐清需求再動手，讓後續的成果更符合我的期待。</span><span lang="en">I gave the AI the full assignment brief so it understood the grading criteria (index.html, studentworks.html, the graph folder, and GitHub Pages publishing). Because it clarified my requirements before building anything, the results that followed matched what I needed.</span></p>
+        </article>
+
+        <!-- Prompt 2 -->
+        <article class="entry">
+          <div class="entry-head"><span class="step"><span lang="zh">提示 2</span><span lang="en">Prompt 2</span></span><span class="tag"><span lang="zh">需求設定</span><span lang="en">Requirements</span></span></div>
+          <h3><span lang="zh">選擇系所、風格與合作方式</span><span lang="en">Choosing the department, style and workflow</span></h3>
+          <div class="k"><span lang="zh">提示（我的選擇）</span><span lang="en">Prompt (my selections)</span></div>
+          <blockquote class="prompt">Department: I'll give a URL
+Style: Classic academic
+Pace: Step by step</blockquote>
+          <div class="k"><span lang="zh">說明與反思</span><span lang="en">Notes / reflection</span></div>
+          <p><span lang="zh">我選擇提供本系官方網站的網址，讓內容以真實資料為基礎。我選擇「逐步進行」，這樣每完成一頁都能先檢查，再決定下一步，也方便記錄每一則提示。</span><span lang="en">I chose to provide my department's official URL so the content would be based on real information. I chose to work step by step so I could review each page before deciding the next move, which also made it easier to record every prompt.</span></p>
+        </article>
+
+        <!-- Prompt 3 -->
+        <article class="entry">
+          <div class="entry-head"><span class="step"><span lang="zh">提示 3</span><span lang="en">Prompt 3</span></span><span class="tag"><span lang="zh">內容蒐集・首頁 v1</span><span lang="en">Content · Homepage v1</span></span></div>
+          <h3><span lang="zh">擷取系所內容，產生第一版首頁</span><span lang="en">Extracting department content for the first homepage</span></h3>
+          <div class="k"><span lang="zh">提示（原文）</span><span lang="en">Prompt (verbatim)</span></div>
+          <blockquote class="prompt">https://mdm.tcu.edu.tw/p/412-1021-2.php, this is the department introduction, and it must have a hyperlink to the https://mdm.tcu.edu.tw/p/412-1021-3692.php?Lang=zh-tw</blockquote>
+          <div class="k"><span lang="zh">AI 回應</span><span lang="en">AI response</span></div>
+          <p><span lang="zh">AI 讀取了系所簡介與學習成果兩個頁面，產生第一版 index.html：深藍與酒紅的經典學院風格、內部 CSS、教育目標、六間教學設備，並在主視覺、學生作品區與頁尾加入學習成果連結。所有照片與影片位置都先以標示好檔名的預留框呈現（例如 graph/hero-campus.jpg）。</span><span lang="en">The AI read both the department introduction and the learning outcomes pages and produced index.html v1: a classic navy-and-maroon academic style with internal CSS, the educational goals, six teaching facilities, and the required learning outcomes link in the hero, student works section and footer. Every photo and video position was a labelled placeholder with its future file name (for example graph/hero-campus.jpg).</span></p>
+          <div class="k"><span lang="zh">說明與反思</span><span lang="en">Notes / reflection</span></div>
+          <ul>
+            <li><span lang="zh">原網站的系所沿革是以圖片呈現，AI 無法擷取文字，因此簡介文字是 AI 依據教育目標與關鍵字撰寫，我需要自行確認內容是否正確。</span><span lang="en">The original site shows the department history as images, so the AI could not extract that text. The introduction was written from the department's goals and keywords, so I needed to check its accuracy myself.</span></li>
+            <li><span lang="zh">AI 沒有直接使用官網的照片，因為作業規定所有圖片必須放在自己的 graph 資料夾，而且官網照片有著作權。</span><span lang="en">The AI did not reuse photos from the official site, because the assignment requires all images to be in my own graph folder and those photos are copyrighted.</span></li>
+          </ul>
+        </article>
+
+        <!-- Prompt 4 -->
+        <article class="entry">
+          <div class="entry-head"><span class="step"><span lang="zh">提示 4</span><span lang="en">Prompt 4</span></span><span class="tag"><span lang="zh">雙語・重新設計</span><span lang="en">Bilingual · Restyle</span></span></div>
+          <h3><span lang="zh">加入中英切換，並改為 MIT 風格</span><span lang="en">Adding a language switch and an MIT-inspired restyle</span></h3>
+          <div class="k"><span lang="zh">提示（原文）</span><span lang="en">Prompt (verbatim)</span></div>
+          <blockquote class="prompt">the page mustbe double launguage, english and chinese, or be able to swithc between langauges, and Could you please restyle the HTML file I just generated? I would like it to have a professional, academic look—reminiscent of a top-tier American university, specifically MIT—or perhaps a clean, minimalist aesthetic typical of American design-related academic programs.</blockquote>
+          <div class="k"><span lang="zh">AI 回應</span><span lang="en">AI response</span></div>
+          <p><span lang="zh">AI 重新設計首頁：單一強調色（紅色 #A31F34）搭配黑、白、灰，大型粗體無襯線字、細線分隔與編號區塊（01–05）。右上角加入「中文／EN」切換按鈕，會切換全頁文字並記住使用者的選擇。AI 也用螢幕截圖檢查桌機與手機版面，發現並修正了兩個 CSS 錯誤。</span><span lang="en">The AI redesigned the homepage with one accent colour (red, #A31F34) plus black, white and grey, large bold sans-serif type, thin rules and numbered sections (01–05). It added a 中文 / EN switch in the header that changes all text on the page and remembers the visitor's choice. The AI also checked desktop and phone screenshots, and found and fixed two CSS bugs.</span></p>
+          <div class="k"><span lang="zh">說明與反思</span><span lang="en">Notes / reflection</span></div>
+          <p><span lang="zh">本系有許多國際學生（例如印尼專班），所以網站需要中英雙語。我參考作業範例 2 的提示，但指定 MIT 作為參考，因為我想要乾淨、現代、有理工學術感的設計，而不是傳統的襯線字風格。</span><span lang="en">The department has many international students (such as the Indonesian program), so the site needed to be bilingual. I adapted the wording of Example 2 from the assignment but named MIT specifically, because I wanted a clean, modern and rigorous look rather than a traditional serif style.</span></p>
+        </article>
+
+        <!-- Prompt 5 -->
+        <article class="entry">
+          <div class="entry-head"><span class="step"><span lang="zh">提示 5</span><span lang="en">Prompt 5</span></span><span class="tag"><span lang="zh">學生作品頁</span><span lang="en">Student Works page</span></span></div>
+          <h3><span lang="zh">建立 studentworks.html</span><span lang="en">Building studentworks.html</span></h3>
+          <div class="k"><span lang="zh">提示（原文）</span><span lang="en">Prompt (verbatim)</span></div>
+          <blockquote class="prompt">its  okay, lets go to the nextstep</blockquote>
+          <div class="k"><span lang="zh">AI 回應</span><span lang="en">AI response</span></div>
+          <p><span lang="zh">AI 依照官網學習成果頁的真實內容，以相同的設計與語言切換建立學生作品頁：九件精選作品（含分類篩選按鈕）、五支 Agrihubbers 社企專題影片、預留的作品影片與六格活動相簿。AI 也實際測試兩頁之間的連結、語言設定是否延續到下一頁，以及手機版面。</span><span lang="en">Using the real content of the official learning outcomes page, the AI built the student works page with the same design and language switch: nine selected works with category filter buttons, five Agrihubbers social enterprise films, a reserved showcase video slot and a six-photo gallery. It also tested the links between the two pages, whether the language choice carried over, and the phone layout.</span></p>
+          <div class="k"><span lang="zh">說明與反思</span><span lang="en">Notes / reflection</span></div>
+          <p><span lang="zh">我對第二版首頁感到滿意，所以直接進入下一步。分類篩選讓訪客能快速找到「專題研究」、「實務經營」、「國際交流」或「影音作品」。</span><span lang="en">I was happy with homepage v2, so I moved straight on. The category filters let visitors quickly find projects, practicum, global or media work.</span></p>
+        </article>
+
+        <!-- Prompt 6 -->
+        <article class="entry">
+          <div class="entry-head"><span class="step"><span lang="zh">提示 6</span><span lang="en">Prompt 6</span></span><span class="tag"><span lang="zh">發布準備</span><span lang="en">Publishing prep</span></span></div>
+          <h3><span lang="zh">準備發布到 GitHub Pages</span><span lang="en">Preparing to publish on GitHub Pages</span></h3>
+          <div class="k"><span lang="zh">提示（原文）</span><span lang="en">Prompt (verbatim)</span></div>
+          <blockquote class="prompt">Teddy5590</blockquote>
+          <div class="k"><span lang="zh">AI 回應</span><span lang="en">AI response</span></div>
+          <p><span lang="zh">我提供 GitHub 帳號後，AI 將網站打包成壓縮檔，並列出發布步驟：建立公開儲存庫、上傳檔案、在 Settings → Pages 選擇 main 分支。AI 提醒我：GitHub 無法上傳空資料夾，所以在 graph 資料夾中放了一個說明檔；index.html 必須放在儲存庫最上層，否則會出現 404。</span><span lang="en">After I gave my GitHub username, the AI zipped the website and listed the publishing steps: create a public repository, upload the files, and choose the main branch under Settings → Pages. It warned me that GitHub cannot upload an empty folder, so it added a small README to the graph folder, and that index.html must sit at the top level of the repository to avoid a 404.</span></p>
+        </article>
+
+        <!-- Prompt 7 -->
+        <article class="entry">
+          <div class="entry-head"><span class="step"><span lang="zh">提示 7–8</span><span lang="en">Prompts 7–8</span></span><span class="tag"><span lang="zh">上線檢查</span><span lang="en">Live check</span></span></div>
+          <h3><span lang="zh">確認網站上線，並建立本頁</span><span lang="en">Confirming the live site and creating this page</span></h3>
+          <div class="k"><span lang="zh">提示（原文）</span><span lang="en">Prompts (verbatim)</span></div>
+          <blockquote class="prompt">it is working, lets go to the next
+
+https://teddy5590.github.io/business-department/studentworks.html</blockquote>
+          <div class="k"><span lang="zh">AI 回應</span><span lang="en">AI response</span></div>
+          <p><span lang="zh">我將儲存庫命名為 business-department。AI 讀取上線後的兩個頁面，確認所有連結都能正常開啟，接著建立這個 AI 協作紀錄頁，並從兩頁的頁尾連結過來。</span><span lang="en">I named my repository business-department. The AI read both live pages, confirmed every link resolved, then created this AI Collaboration Record page and linked it from the footer of both pages.</span></p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 02 Problems ============ -->
+  <section id="problems">
+    <div class="wrap row">
+      <div class="label"><span class="no">02</span><span lang="zh">問題與解決</span><span lang="en">Problems &amp; Fixes</span></div>
+      <div>
+        <h2><span lang="zh">開發中遇到的問題</span><span lang="en">Problems we ran into</span></h2>
+        <table>
+          <thead><tr><th><span lang="zh">問題</span><span lang="en">Problem</span></th><th><span lang="zh">解決方式</span><span lang="en">Fix</span></th></tr></thead>
+          <tbody>
+            <tr><td><span lang="zh">原網站的系所沿革是圖片，無法擷取文字</span><span lang="en">The original history section was images, not text</span></td><td><span lang="zh">以官網的教育目標與關鍵字撰寫簡介，再由我確認內容。</span><span lang="en">Wrote the introduction from the site's goals and keywords, then I checked it.</span></td></tr>
+            <tr><td><span lang="zh">首頁標誌文字在雙語版變成灰色小字</span><span lang="en">The header name turned small and grey after adding two languages</span></td><td><span lang="zh">CSS 選擇器也套用到語言標籤上；改用專屬的 class 名稱。</span><span lang="en">A CSS selector also matched the language spans; replaced it with dedicated class names.</span></td></tr>
+            <tr><td><span lang="zh">編號區塊沒有對齊頁面邊界</span><span lang="en">Numbered sections did not line up with the page margins</span></td><td><span lang="zh">區塊的 padding 覆蓋了容器的左右邊距；改為只設定上下 padding。</span><span lang="en">The section padding overrode the container's side margins; changed it to set only top and bottom padding.</span></td></tr>
+            <tr><td><span lang="zh">學生作品頁的部分統計數字字體過小</span><span lang="en">Some headline numbers on the Student Works page rendered too small</span></td><td><span lang="zh">調整 CSS 選擇器，只套用到說明文字。</span><span lang="en">Narrowed the CSS selector so it only applied to the caption text.</span></td></tr>
+            <tr><td><span lang="zh">GitHub 無法上傳空的 graph 資料夾</span><span lang="en">GitHub cannot upload an empty graph folder</span></td><td><span lang="zh">在資料夾中放入 README.md 說明檔。</span><span lang="en">Added a README.md file inside the folder.</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 03 My decisions ============ -->
+  <section id="decisions">
+    <div class="wrap row">
+      <div class="label"><span class="no">03</span><span lang="zh">我的決策</span><span lang="en">My Decisions</span></div>
+      <div>
+        <h2><span lang="zh">我自己做的設計決定</span><span lang="en">Design decisions I made</span></h2>
+        <ul class="decisions">
+          <li><b><span lang="zh">內容來源</span><span lang="en">Content source</span></b><span class="d"><span lang="zh">使用本系官方網站作為內容基礎，並指定必須連結學習成果頁。</span><span lang="en">Using the official department site as the content source, and requiring a link to the learning outcomes page.</span></span></li>
+          <li><b><span lang="zh">雙語網站</span><span lang="en">Bilingual site</span></b><span class="d"><span lang="zh">要求中英文切換，服務本系的國際學生與訪客。</span><span lang="en">Requiring a Chinese/English switch to serve international students and visitors.</span></span></li>
+          <li><b><span lang="zh">視覺方向</span><span lang="en">Visual direction</span></b><span class="d"><span lang="zh">從經典學院風改為 MIT 啟發的極簡風格。</span><span lang="en">Moving from a classic academic style to an MIT-inspired minimalist one.</span></span></li>
+          <li><b><span lang="zh">發布方式</span><span lang="en">Publishing</span></b><span class="d"><span lang="zh">將儲存庫命名為 business-department，並透過 GitHub Pages 公開發布。</span><span lang="en">Naming the repository business-department and publishing it publicly with GitHub Pages.</span></span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 04 Final reflection ============ -->
+  <section id="reflection">
+    <div class="wrap row">
+      <div class="label"><span class="no">04</span><span lang="zh">總結反思</span><span lang="en">Final Reflection</span></div>
+      <div class="reflection">
+        <h2><span lang="zh">我從這次合作中學到什麼</span><span lang="en">What I learned from working with AI</span></h2>
+        <p><span lang="zh">AI 幫助我快速完成網站的結構、程式碼與雙語內容，也協助我在發布前測試連結與手機版面。它在開始前會先確認需求，並在發現錯誤時主動修正，讓整個過程比我自己從頭寫程式更有效率。</span><span lang="en">AI helped me build the site's structure, code and bilingual content quickly, and it tested the links and phone layout before publishing. It asked about my requirements before starting and fixed bugs it found, which made the process much faster than writing everything from scratch.</span></p>
+        <p><span lang="zh">不過，網站的方向仍是由我決定：要介紹哪個系、要放哪些內容、要什麼風格，以及是否需要雙語。我也了解到 AI 撰寫的內容必須經過人工確認，因為它無法讀取圖片中的文字，有些內容需要我依實際情況修正。</span><span lang="en">The direction of the site, though, was mine: which department to present, what content to include, which style to use, and whether it should be bilingual. I also learned that AI-written content must be checked by a person. The AI could not read text inside images, so some content needed me to verify it against reality.</span></p>
+        <p><span lang="zh">最重要的是，我學會把需求說清楚：當我的提示越具體（例如指定 MIT 風格、指定必須連結的網址），AI 的成果就越符合我的期待。接下來的課程中，我會把自己拍攝的照片與影片放進 graph 資料夾，並持續記錄後續的提示。</span><span lang="en">Most importantly, I learned to state my requirements clearly. The more specific my prompt (naming MIT as the style, giving the exact URL to link), the closer the result was to what I wanted. In upcoming classes I will add my own photos and videos to the graph folder and keep recording each new prompt here.</span></p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site" id="contact">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <div class="big"><span lang="zh">慈濟大學<br>經營管理學系</span><span lang="en">Department of Business Management<br>Tzu Chi University</span></div>
+        <p>
+          <span lang="zh">970 花蓮市介仁街 67 號</span><span lang="en">No. 67, Jieren St., Hualien City 970, Taiwan</span><br>
+          <span lang="zh">電話</span><span lang="en">Tel</span> 03-857-2677 ext. 31682<br>
+          <a href="mailto:ss62@gms.tcu.edu.tw">ss62@gms.tcu.edu.tw</a>
+        </p>
+      </div>
+      <div>
+        <h4><span lang="zh">網站導覽</span><span lang="en">Explore</span></h4>
+        <ul>
+          <li><a href="index.html"><span lang="zh">系所簡介</span><span lang="en">About</span></a></li>
+          <li><a href="studentworks.html"><span lang="zh">學生作品</span><span lang="en">Student Works</span></a></li>
+          <li><a href="airecord.html"><span lang="zh">AI 協作紀錄</span><span lang="en">AI Collaboration Record</span></a></li>
+          <li><a href="https://mdm.tcu.edu.tw/p/412-1021-3692.php?Lang=zh-tw" target="_blank" rel="noopener"><span lang="zh">學習成果</span><span lang="en">Learning Outcomes</span> ↗</a></li>
+          <li><a href="https://mdm.tcu.edu.tw/" target="_blank" rel="noopener"><span lang="zh">系所官方網站</span><span lang="en">Official Website</span> ↗</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4><span lang="zh">社群媒體</span><span lang="en">Follow</span></h4>
+        <ul>
+          <li><a href="https://www.instagram.com/tcu_business_management/" target="_blank" rel="noopener">Instagram ↗</a></li>
+          <li><a href="https://www.youtube.com/@_tcust5687" target="_blank" rel="noopener">YouTube ↗</a></li>
+          <li><a href="https://www.facebook.com/profile.php?id=100086684253354" target="_blank" rel="noopener">Facebook ↗</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© 2026 <span lang="zh">慈濟大學經營管理學系</span><span lang="en">Department of Business Management, Tzu Chi University</span></span>
+      <span><span lang="zh">網頁設計課程專題</span><span lang="en">Web design course project</span></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const root = document.documentElement;
+  const langButtons = document.querySelectorAll('[data-set-lang]');
+  function setLang(lang) {
+    root.setAttribute('data-lang', lang);
+    root.setAttribute('lang', lang === 'zh' ? 'zh-Hant-TW' : 'en');
+    langButtons.forEach(b => b.setAttribute('aria-pressed', b.dataset.setLang === lang));
+    try { localStorage.setItem('site-lang', lang); } catch (e) {}
+  }
+  let saved = null;
+  try { saved = localStorage.getItem('site-lang'); } catch (e) {}
+  setLang(saved === 'en' ? 'en' : 'zh');
+  langButtons.forEach(b => b.addEventListener('click', () => setLang(b.dataset.setLang)));
+
+  const menuBtn = document.querySelector('.menu-btn');
+  const nav = document.querySelector('nav.main');
+  menuBtn.addEventListener('click', () => {
+    const open = nav.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', open);
+  });
+  nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    nav.classList.remove('open');
+    menuBtn.setAttribute('aria-expanded', false);
+  }));
+</script>
+</body>
+</html>

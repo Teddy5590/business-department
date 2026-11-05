@@ -188,6 +188,20 @@
   .video-note { margin-top: 14px; font-size: 14px; }
   .video-note a { color: var(--white); font-weight: 700; text-decoration: none; border-bottom: 1px solid var(--grey-400); }
   .video-note a:hover { color: #ff8a9a; border-color: #ff8a9a; }
+  /* Photos */
+  figure { margin: 0; }
+  figcaption { font-size: 13px; color: var(--grey-600); margin-top: 10px; padding-left: 12px; border-left: 3px solid var(--red); line-height: 1.5; }
+  .sustain-split { display: grid; grid-template-columns: 5fr 7fr; gap: 40px; align-items: start; }
+  .poster-figure img { width: 100%; height: auto; }
+  .sustain-text h3 { font-size: 20px; font-weight: 800; line-height: 1.35; margin: 26px 0 8px; }
+  .sustain-text .kicker + h3 { margin-top: 12px; }
+  .sustain-text p { color: var(--grey-600); }
+  .awards { list-style: none; margin-top: 14px; border-top: 1px solid var(--black); }
+  .awards li { display: grid; grid-template-columns: 64px 1fr; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--grey-200); font-size: 15px; }
+  .awards b { color: var(--red); }
+  .group-figure { margin-bottom: 12px; }
+  .group-figure img { width: 100%; height: auto; }
+  @media (max-width: 860px) { .sustain-split { grid-template-columns: 1fr; } .poster-figure { max-width: 420px; } }
 </style>
 </head>
 <body>
@@ -393,9 +407,38 @@
   </section>
 
   <!-- ============ 02 Social enterprise films ============ -->
+  <!-- ============ 02 Sustainability projects (project / still-life photo) ============ -->
+  <section id="sustainability">
+    <div class="wrap row">
+      <div class="label"><span class="no">02</span><span lang="zh">永續專題</span><span lang="en">Sustainability</span></div>
+      <div>
+        <h2><span lang="zh">永續管理專題成果</span><span lang="en">Sustainability management projects</span></h2>
+        <div class="sustain-split">
+          <figure class="poster-figure">
+            <img src="graph/work_sustainability.jpg" alt="經營管理學系永續專題成果海報 Department of Business Management sustainability project poster" width="1200" height="2131" loading="lazy">
+            <figcaption><span lang="zh">系館展示的永續專題成果海報</span><span lang="en">Sustainability project poster on display in the department</span></figcaption>
+          </figure>
+          <div class="sustain-text">
+            <div class="kicker"><span lang="zh">國際視野 ・ 專業實務 ・ 創新創業</span><span lang="en">Global Vision · Professional Practice · Innovation</span></div>
+            <h3><span lang="zh">透過跨領域專題，建構永續管理知識體系</span><span lang="en">Building sustainability management knowledge through cross-disciplinary projects</span></h3>
+            <p><span lang="zh">學生開發太陽熱能乾燥機，為農產品加值，並整合 AIoT 技術、品牌管理、綠色行銷與碳經濟知識。</span><span lang="en">Students developed a solar thermal dryer that adds value to farm produce, combining AIoT technology, brand management, green marketing and carbon economics.</span></p>
+            <ul class="awards">
+              <li><b>2022</b><span lang="zh">教育部「臺灣『能』永續能源創意實作競賽」大專綠能創新組 金牌獎</span><span lang="en">Gold Award, Green Energy Innovation (university division), Ministry of Education Sustainable Energy Creative Practice Competition</span></li>
+              <li><b>2023</b><span lang="zh">經濟部「台灣創新技術博覽會發明競賽」銀牌獎</span><span lang="en">Silver Award, Invention Contest, Taiwan Innotech Expo (Ministry of Economic Affairs)</span></li>
+            </ul>
+            <h3><span lang="zh">參訪永續發展標竿場域，拓展國際視野</span><span lang="en">Visiting leading sustainability sites</span></h3>
+            <p><span lang="zh">嘉義義竹太陽光電場、桃園源鮮智慧農場（亞洲規模最大的垂直農場），以及桃園歐萊德公司總部。</span><span lang="en">The Yizhu solar farm in Chiayi, Yuan Xian Smart Farm in Taoyuan (Asia's largest vertical farm), and the O'right headquarters in Taoyuan.</span></p>
+            <h3><span lang="zh">鼓勵青銀共學共好</span><span lang="en">Learning across generations</span></h3>
+            <p><span lang="zh">與慈濟科技大學樂齡大學共同開發、調製綠色花草茶，帶領長者創作園藝組盆，並至花蓮博愛浸信會推廣綠色品牌。</span><span lang="en">With Tzu Chi University of Science and Technology's senior learning programme, students co-developed green herbal teas, led seniors in creating potted gardens, and promoted a green brand in the Hualien community.</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="agrihubbers">
     <div class="wrap row">
-      <div class="label"><span class="no">02</span><span lang="zh">社企專題</span><span lang="en">Social Enterprise</span></div>
+      <div class="label"><span class="no">03</span><span lang="zh">社企專題</span><span lang="en">Social Enterprise</span></div>
       <div>
         <h2><span lang="zh">東部生活型態：社企聚落專題</span><span lang="en">Eastern Taiwan lifestyles: social enterprise projects</span></h2>
         <p class="muted" style="margin-bottom:28px">
@@ -417,7 +460,7 @@
   <!-- ============ 03 Featured film ============ -->
   <section class="dark" id="film">
     <div class="wrap row">
-      <div class="label"><span class="no">03</span><span lang="zh">作品影片</span><span lang="en">Showcase Film</span></div>
+      <div class="label"><span class="no">04</span><span lang="zh">作品影片</span><span lang="en">Showcase Film</span></div>
       <div>
         <h2><span lang="zh">印尼異國蔬食</span><span lang="en">Indonesian Vegetarian Cuisine</span></h2>
         <p class="muted" style="margin-bottom:28px">
@@ -439,7 +482,7 @@
   <!-- ============ 04 Photo gallery (reserved) ============ -->
   <section id="gallery">
     <div class="wrap row">
-      <div class="label"><span class="no">04</span><span lang="zh">活動相簿</span><span lang="en">Gallery</span></div>
+      <div class="label"><span class="no">05</span><span lang="zh">活動相簿</span><span lang="en">Gallery</span></div>
       <div>
         <h2><span lang="zh">本學期活動紀錄</span><span lang="en">This semester in photos</span></h2>
         <p class="muted" style="margin-bottom:28px">
@@ -447,13 +490,15 @@
           <span lang="en">This space is reserved for photographs taken during this semester's classes.</span>
         </p>
         <!-- PHOTO SLOTS — replace each div with <img src="graph/gallery-0X.jpg" alt="..." style="width:100%;height:100%;object-fit:cover"> -->
+        <figure class="group-figure">
+          <img src="graph/group_discussion.jpg" alt="經管系同學參訪交流，聆聽簡報並分組討論 Business Management students listening to a presentation and discussing together on a visit" width="1477" height="1108" loading="lazy">
+          <figcaption><span lang="zh">同學參訪交流，聆聽簡報並分組討論</span><span lang="en">Students on a visit, listening to a presentation and discussing together</span></figcaption>
+        </figure>
         <div class="gallery">
-          <div class="media-slot wide"><code>graph/gallery-01.jpg</code></div>
           <div class="media-slot"><code>graph/gallery-02.jpg</code></div>
           <div class="media-slot"><code>graph/gallery-03.jpg</code></div>
           <div class="media-slot"><code>graph/gallery-04.jpg</code></div>
           <div class="media-slot"><code>graph/gallery-05.jpg</code></div>
-          <div class="media-slot wide"><code>graph/gallery-06.jpg</code></div>
         </div>
       </div>
     </div>
@@ -462,7 +507,7 @@
   <!-- ============ 05 CTA ============ -->
   <section class="cta">
     <div class="wrap row">
-      <div class="label"><span class="no">05</span><span lang="zh">更多</span><span lang="en">More</span></div>
+      <div class="label"><span class="no">06</span><span lang="zh">更多</span><span lang="en">More</span></div>
       <div>
         <h2><span lang="zh">認識更多經管系</span><span lang="en">Discover more</span></h2>
         <p>
